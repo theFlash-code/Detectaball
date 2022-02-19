@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'register.dart';
+import 'start.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,12 +9,14 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: Text('Detectaball'),
-        ),
-        body: HomePage(),
+        // appBar: AppBar(
+        //   backgroundColor: Colors.blueGrey,
+        //   title: Text('Detectaball'),
+        // ),
+        // body: HomePage(),
+        body: start(),
       ),
     );
   }
@@ -25,6 +28,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
         TextField(
           controller: myController,
@@ -37,13 +41,23 @@ class HomePage extends StatelessWidget {
         ElevatedButton(
           child: Text('登入'),
           onPressed: btnEvent,
+          style: ElevatedButton.styleFrom(
+            primary: Colors.orange,
+          ),
         ),
         ElevatedButton(
           child: Text('註冊'),
           onPressed: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => BPage()));
+              context,
+              MaterialPageRoute(
+                builder: (context) => BPage(),
+              ),
+            );
           },
+          style: ElevatedButton.styleFrom(
+            primary: Colors.orange,
+          ),
         )
       ],
     );
