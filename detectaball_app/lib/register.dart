@@ -1,25 +1,18 @@
 import 'package:flutter/material.dart';
-import 'register.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
+class BPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Detectaball'),
-        ),
-        body: HomePage(),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('註冊'),
       ),
+      body: _BPage(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class _BPage extends StatelessWidget {
   final TextEditingController myController = new TextEditingController();
   final TextEditingController myController2 = new TextEditingController();
   @override
@@ -35,22 +28,11 @@ class HomePage extends StatelessWidget {
           decoration: InputDecoration(hintText: '密碼'),
         ),
         ElevatedButton(
-          child: Text('登入'),
-          onPressed: btnEvent,
-        ),
-        ElevatedButton(
-          child: Text('註冊'),
-          onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => BPage()));
-          },
-        )
+            child: Text('註冊'),
+            onPressed: () {
+              Navigator.pop(context);
+            })
       ],
     );
-  }
-
-  void btnEvent() {
-    print(myController.text);
-    print(myController2.text);
   }
 }
