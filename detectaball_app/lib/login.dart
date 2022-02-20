@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 final TextEditingController myController = new TextEditingController();
 final TextEditingController myController2 = new TextEditingController();
 
-Widget buildAccount() {
+Widget buildEmail() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
@@ -88,14 +89,14 @@ Widget buildLoginBtn() {
       child: const Text(
         'LOGIN',
         style: TextStyle(
-          color: Colors.white,
+          color: Color(0xff274053),
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
       ),
       onPressed: btnEvent,
       style: ElevatedButton.styleFrom(
-        primary: const Color(0xff274053),
+        primary: Colors.white,
         padding: const EdgeInsets.all(15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       ),
@@ -106,36 +107,67 @@ Widget buildLoginBtn() {
 }
 
 Widget buildHomePage() {
-  return SingleChildScrollView(
-    padding: const EdgeInsets.symmetric(
-      horizontal: 25,
-      vertical: 120,
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        // TextField(
-        //   controller: myController,
-        //   decoration: InputDecoration(hintText: 'Account'),
-        // ),
-        // TextField(
-        //   controller: myController2,
-        //   decoration: InputDecoration(hintText: 'Password'),
-        // ),
-        // ElevatedButton(
-        //   child: Text('登入'),
-        // onPressed: btnEvent,
-        // style: ElevatedButton.styleFrom(
-        //   primary: Colors.orange,
-        // ),
-        // ),
-        Container(
-          child: Image(image: AssetImage('img/detectaball_logo.png')),
+  return Scaffold(
+    body: AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.dark,
+      child: GestureDetector(
+        child: Stack(
+          children: [
+            Container(
+              height: double.infinity,
+              width: double.infinity,
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0x66274053),
+                    Color(0x77274053),
+                    Color(0xbb274053),
+                    Color(0xff274053),
+                  ],
+                ),
+              ),
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 25,
+                  vertical: 200,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      child:
+                          Image(image: AssetImage('img/detectaball_logo.png')),
+                    ),
+                    SizedBox(height: 10),
+                    buildEmail(),
+                    SizedBox(height: 10),
+                    buildPassword(),
+                    SizedBox(height: 10),
+                    buildLoginBtn(),
+                    // TextField(
+                    //   controller: myController,
+                    //   decoration: InputDecoration(hintText: 'Account'),
+                    // ),
+                    // TextField(
+                    //   controller: myController2,
+                    //   decoration: InputDecoration(hintText: 'Password'),
+                    // ),
+                    // ElevatedButton(
+                    //   child: Text('登入'),
+                    // onPressed: btnEvent,
+                    // style: ElevatedButton.styleFrom(
+                    //   primary: Colors.orange,
+                    // ),
+                    // ),
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
-        buildAccount(),
-        buildPassword(),
-        buildLoginBtn(),
-      ],
+      ),
     ),
   );
 }
@@ -145,10 +177,10 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.blueGrey,
-          title: Text('Detectaball'),
-        ),
+        // appBar: AppBar(
+        //   backgroundColor: Color(0x66274053),
+        //   title: Text('Detectaball'),
+        // ),
         body: buildHomePage(),
       ),
     );
