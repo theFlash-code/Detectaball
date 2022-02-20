@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'register.dart';
+import 'Home.dart';
 
 void main() {
   runApp(MyApp());
@@ -28,7 +29,7 @@ class HomePage extends StatelessWidget {
       children: <Widget>[
         TextField(
           controller: myController,
-          decoration: InputDecoration(hintText: '帳號'),
+          decoration: InputDecoration(hintText: '帳號(電子郵件)'),
         ),
         TextField(
           controller: myController2,
