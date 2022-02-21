@@ -106,7 +106,7 @@ Widget buildLoginBtn() {
   );
 }
 
-Widget buildHomePage() {
+Widget buildLoginPage() {
   return Scaffold(
     body: AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
@@ -121,8 +121,8 @@ Widget buildHomePage() {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Color(0x66274053),
-                    Color(0x77274053),
+                    Color(0x11274053),
+                    Color(0x55274053),
                     Color(0xbb274053),
                     Color(0xff274053),
                   ],
@@ -131,7 +131,7 @@ Widget buildHomePage() {
               child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 25,
-                  vertical: 200,
+                  vertical: 120,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -175,14 +175,14 @@ Widget buildHomePage() {
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor: Color(0x66274053),
-        //   title: Text('Detectaball'),
-        // ),
-        body: buildHomePage(),
+    return Scaffold(
+      appBar: AppBar(
+        foregroundColor: const Color.fromARGB(221, 61, 35, 0),
+        shadowColor: const Color.fromARGB(255, 255, 41, 41),
+        backgroundColor: Color.fromARGB(197, 255, 195, 137),
+        title: const Text('Detectaball'),
       ),
+      body: buildLoginPage(),
     );
   }
 }

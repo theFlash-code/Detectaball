@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'register.dart';
+import 'Bpage.dart';
 import 'login.dart';
+import 'register.dart';
 
 class start extends StatefulWidget {
   const start({Key? key}) : super(key: key);
@@ -12,13 +13,13 @@ class start extends StatefulWidget {
 
 Widget buildLoginBtn(context) {
   return Container(
-    padding: const EdgeInsets.symmetric(vertical: 25),
+    padding: const EdgeInsets.symmetric(vertical: 10),
     width: double.infinity,
     child: ElevatedButton(
       child: const Text(
         'LOGIN',
         style: TextStyle(
-          color: Color(0xff274053),
+          color: Colors.white,
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
@@ -30,7 +31,7 @@ Widget buildLoginBtn(context) {
         );
       },
       style: ElevatedButton.styleFrom(
-        primary: Colors.white,
+        primary: Color.fromARGB(255, 255, 160, 0),
         padding: const EdgeInsets.all(15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       ),
@@ -40,7 +41,7 @@ Widget buildLoginBtn(context) {
 
 Widget buildRegisterBtn(context) {
   return Container(
-    padding: const EdgeInsets.symmetric(vertical: 15),
+    padding: const EdgeInsets.symmetric(vertical: 10),
     width: double.infinity,
     child: ElevatedButton(
       child: const Text(
@@ -54,7 +55,7 @@ Widget buildRegisterBtn(context) {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => BPage()),
+          MaterialPageRoute(builder: (context) => registerPage()),
         );
       },
       style: ElevatedButton.styleFrom(
@@ -83,8 +84,8 @@ class _startState extends State<start> {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Color(0x66274053),
-                      Color(0x77274053),
+                      Color(0x11274053),
+                      Color(0x55274053),
                       Color(0xbb274053),
                       Color(0xff274053),
                     ],
