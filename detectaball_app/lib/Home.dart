@@ -48,8 +48,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     final List<String> titles = [
-      "Pratice",
-      "Scoreboard",
+      "",
+      "Practice",
       "Profile",
     ];
 
@@ -59,20 +59,27 @@ class _MyHomePageState extends State<MyHomePage> {
           print("Click event on Container");
         },
         child: Container(
-          // decoration: BoxDecoration(
-          //   image: DecorationImage(
-          //     image: AssetImage('img/scoreboard.png'),
-          //     //fit: BoxFit.fill,
-          //   ),
-          // ),
-          color: Colors.yellow[700],
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('img/scoreboard.png'),
+                //fit: BoxFit.fill,
+              ),
+              color: Colors.yellow[700],
+              borderRadius: BorderRadius.circular(15)),
+          //color: Colors.yellow[700],
         ),
       ),
       Container(
-        color: Colors.blueGrey,
+        decoration: BoxDecoration(
+          color: Colors.blueGrey,
+          borderRadius: BorderRadius.circular(15),
+        ),
       ),
       Container(
-        color: Colors.grey,
+        decoration: BoxDecoration(
+          color: Colors.grey,
+          borderRadius: BorderRadius.circular(15),
+        ),
       ),
     ];
     return Scaffold(
