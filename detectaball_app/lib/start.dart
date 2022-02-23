@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'register.dart';
 import 'login.dart';
+import 'profile.dart';
 
 class start extends StatefulWidget {
   const start({Key? key}) : super(key: key);

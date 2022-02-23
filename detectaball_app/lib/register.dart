@@ -1,4 +1,6 @@
+import 'package:detectaball_app/profile.dart';
 import 'package:flutter/material.dart';
+import 'profile.dart';
 
 class BPage extends StatelessWidget {
   @override
@@ -34,10 +36,16 @@ class _BPage extends StatelessWidget {
           decoration: InputDecoration(hintText: '密碼'),
         ),
         ElevatedButton(
-            child: Text('註冊'),
-            onPressed: () {
-              Navigator.pop(context);
-            })
+          child: Text('註冊'),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => profile(
+                      name: myController.text, email: myController2.text)),
+            );
+          },
+        )
       ],
     );
   }
@@ -48,3 +56,39 @@ class _BPage extends StatelessWidget {
     print(myController3.text);
   }
 }
+// body: Container(
+//      color: Colors.grey,
+//         child: Text(
+//           'User name： $name',
+//           style: TextStyle(
+//               fontSize: 50.0, color: Colors.grey, fontStyle: FontStyle.italic),
+//         ),
+//       ),
+// Text(
+//   'User name： $name',
+//   style: TextStyle(
+//       color: Colors.black, fontSize: 30, fontWeight: FontWeight.w700),
+// ),
+// Text('Email: $email'),
+// ElevatedButton(
+//   child: const Text(
+//     'Log Out',
+//     style: TextStyle(
+//       color: Color(0xff274053),
+//       fontSize: 18,
+//       fontWeight: FontWeight.bold,
+//     ),
+//   ),
+//   onPressed: () {
+//     Navigator.push(
+//       context,
+//       MaterialPageRoute(builder: (context) => start()),
+//     );
+//   },
+//   style: ElevatedButton.styleFrom(
+//     primary: Colors.white,
+//     padding: const EdgeInsets.all(15),
+//     shape: RoundedRectangleBorder(
+//         borderRadius: BorderRadius.circular(15)),
+//   ),
+// )

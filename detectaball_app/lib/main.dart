@@ -42,14 +42,14 @@ class MyApp extends StatelessWidget {
 //         ),
 //         ElevatedButton(
 //           child: Text('註冊'),
-//           onPressed: () {
-//             Navigator.push(
-//               context,
-//               MaterialPageRoute(
-//                 builder: (context) => BPage(),
-//               ),
-//             );
-//           },
+          // onPressed: () {
+          //   Navigator.push(
+          //     context,
+          //     MaterialPageRoute(
+          //       builder: (context) => BPage(),
+          //     ),
+          //   );
+          // },
 //           style: ElevatedButton.styleFrom(
 //             primary: Colors.orange,
 //           ),
