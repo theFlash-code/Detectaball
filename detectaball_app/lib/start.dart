@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'register.dart';
 import 'login.dart';
+import 'Home.dart';
 
 class start extends StatefulWidget {
   const start({Key? key}) : super(key: key);
@@ -24,6 +25,7 @@ Widget buildLoginBtn(context) {
         ),
       ),
       onPressed: () {
+        print('hello sherry');
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => LoginPage()),
