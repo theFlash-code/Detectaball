@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'register.dart';
+import 'Bpage.dart';
 import 'start.dart';
 
 void main() {
