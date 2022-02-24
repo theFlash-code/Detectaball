@@ -1,5 +1,4 @@
 import 'package:detectaball_app/start.dart';
-import 'package:detectaball_app/start.dart';
 import 'package:flutter/material.dart';
 
 class profile extends StatelessWidget {

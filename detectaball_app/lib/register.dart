@@ -2,7 +2,10 @@ import 'package:detectaball_app/start.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'login.dart';
+import 'profile.dart';
 
+final TextEditingController myController3 = new TextEditingController();
+final TextEditingController myController4 = new TextEditingController();
 Widget buildUserName() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,7 +27,7 @@ Widget buildUserName() {
             ]),
         height: 60,
         child: TextField(
-          controller: myController,
+          controller: myController3,
           keyboardType: TextInputType.emailAddress,
           style: const TextStyle(
             color: Colors.black87,
@@ -63,7 +66,7 @@ Widget buildConfirmPassword() {
             ]),
         height: 60,
         child: TextField(
-          controller: myController,
+          controller: myController4,
           keyboardType: TextInputType.emailAddress,
           style: const TextStyle(
             color: Colors.black87,
@@ -96,11 +99,13 @@ Widget buildRegisterBtn(context) {
         ),
       ),
       onPressed: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => registerPage()),
-        // );
-        print("sign up");
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) =>
+                  profile(name: myController3.text, email: myController.text)),
+        );
+        print('sign up');
       },
       style: ElevatedButton.styleFrom(
         primary: Color.fromARGB(255, 255, 160, 0),
