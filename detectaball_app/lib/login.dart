@@ -1,3 +1,5 @@
+// import 'dart:js';
+import 'Home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -81,7 +83,7 @@ Widget buildPassword() {
   );
 }
 
-Widget buildLoginBtn() {
+Widget buildLoginBtn(context) {
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 25),
     width: double.infinity,
@@ -94,7 +96,12 @@ Widget buildLoginBtn() {
           fontWeight: FontWeight.bold,
         ),
       ),
-      onPressed: btnEvent,
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => Home()),
+        );
+      },
       style: ElevatedButton.styleFrom(
         primary: Colors.white,
         padding: const EdgeInsets.all(15),
@@ -106,7 +113,7 @@ Widget buildLoginBtn() {
   );
 }
 
-Widget buildLoginPage() {
+Widget buildLoginPage(context) {
   return Scaffold(
     body: AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
@@ -145,7 +152,7 @@ Widget buildLoginPage() {
                     SizedBox(height: 10),
                     buildPassword(),
                     SizedBox(height: 10),
-                    buildLoginBtn(),
+                    buildLoginBtn(context),
                     // TextField(
                     //   controller: myController,
                     //   decoration: InputDecoration(hintText: 'Account'),
@@ -182,7 +189,7 @@ class LoginPage extends StatelessWidget {
         backgroundColor: Color.fromARGB(197, 255, 195, 137),
         title: const Text('Detectaball'),
       ),
-      body: buildLoginPage(),
+      body: buildLoginPage(context),
     );
   }
 }
