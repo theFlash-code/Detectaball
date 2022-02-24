@@ -1,4 +1,4 @@
-// import 'package:detectaball_app/start.dart';
+import 'package:detectaball_app/start.dart';
 import 'package:detectaball_app/start.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +19,7 @@ class profile extends StatelessWidget {
         children: <Widget>[
           Container(
             height: 130,
-            width: 600,
+            width: 400,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
                 color: Colors.grey),
@@ -27,7 +27,7 @@ class profile extends StatelessWidget {
               '\nUser name : $name\n\nEmail : $email',
               style: TextStyle(
                 fontSize: 25.0,
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -35,7 +35,7 @@ class profile extends StatelessWidget {
           Text('\n'),
           Container(
             height: 200,
-            width: 600,
+            width: 400,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
                 color: Colors.grey),
@@ -43,7 +43,7 @@ class profile extends StatelessWidget {
               '\nGame Record :',
               style: TextStyle(
                 fontSize: 25.0,
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -51,7 +51,7 @@ class profile extends StatelessWidget {
           Text('\n'),
           Container(
             height: 200,
-            width: 600,
+            width: 400,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(20.0)),
                 color: Colors.grey),
@@ -59,7 +59,7 @@ class profile extends StatelessWidget {
               '\nPractice Record :',
               style: TextStyle(
                 fontSize: 25.0,
-                color: Colors.black,
+                color: Colors.white,
                 fontWeight: FontWeight.w700,
               ),
             ),
@@ -91,9 +91,3 @@ class profile extends StatelessWidget {
     );
   }
 }
-// Text(
-//   'User name： $name',
-//   style: TextStyle(
-//       color: Colors.black, fontSize: 30, fontWeight: FontWeight.w700),
-// ),
-// Text('Email: $email'),
