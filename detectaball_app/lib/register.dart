@@ -123,10 +123,13 @@ class registerPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: const Color.fromARGB(221, 61, 35, 0),
-        shadowColor: const Color.fromARGB(255, 255, 41, 41),
-        backgroundColor: Color.fromARGB(197, 255, 195, 137),
-        title: const Text('Detectaball'),
+        foregroundColor: Colors.black,
+        backgroundColor: Colors.white60,
+        title: const Image(
+          image: AssetImage('img/detectaball_logo.png'),
+          height: 100,
+          width: 200,
+        ),
       ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
         value: SystemUiOverlayStyle.dark,
@@ -157,9 +160,11 @@ class registerPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Container(
-                        child: const Image(
-                            image: AssetImage('img/detectaball_logo.png')),
-                      ),
+                          // child: const Image(
+                          //     //image: AssetImage('img/detectaball_logo.png')
+                          //     ),
+                          ),
+                      const SizedBox(height: 60),
                       buildUserName(),
                       const SizedBox(height: 10),
                       buildEmail(),
@@ -167,7 +172,7 @@ class registerPage extends StatelessWidget {
                       buildPassword(),
                       const SizedBox(height: 10),
                       buildConfirmPassword(),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 50),
                       buildRegisterBtn(context)
                     ],
                   ),

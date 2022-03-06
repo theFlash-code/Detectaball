@@ -1,30 +1,31 @@
 // import 'dart:js';
 import 'Home.dart';
-import 'Match.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 final TextEditingController myController = new TextEditingController();
 final TextEditingController myController2 = new TextEditingController();
 
-Widget buildEmail() {
+Widget buildLeftUser() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      const Text(
-        'Email',
-        style: TextStyle(
-            color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-      ),
+      // const Text(
+      //   'Left User',
+      //   style: TextStyle(
+      //       color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+      // ),
       const SizedBox(height: 10),
       Container(
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: Color.fromARGB(255, 230, 230, 230),
             borderRadius: BorderRadius.circular(10),
             boxShadow: const [
               BoxShadow(
-                  color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+                  color: Color.fromARGB(100, 0, 0, 0),
+                  blurRadius: 6,
+                  offset: Offset(0, 2)),
             ]),
         height: 60,
         child: TextField(
@@ -36,8 +37,8 @@ Widget buildEmail() {
           decoration: const InputDecoration(
             border: InputBorder.none,
             contentPadding: EdgeInsets.only(top: 14),
-            prefixIcon: Icon(Icons.email, color: Color(0xff274053)),
-            hintText: 'Email',
+            prefixIcon: Icon(Icons.switch_right, color: Color(0xff274053)),
+            hintText: 'Left User',
             hintStyle: TextStyle(color: Colors.black38),
           ),
         ),
@@ -46,24 +47,26 @@ Widget buildEmail() {
   );
 }
 
-Widget buildPassword() {
+Widget buildRightUser() {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: <Widget>[
-      const Text(
-        'Password',
-        style: TextStyle(
-            color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
-      ),
+      // const Text(
+      //   'Password',
+      //   style: TextStyle(
+      //       color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+      // ),
       const SizedBox(height: 10),
       Container(
         alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
-            color: Colors.white,
+            color: Color.fromARGB(255, 230, 230, 230),
             borderRadius: BorderRadius.circular(10),
             boxShadow: const [
               BoxShadow(
-                  color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))
+                  color: Color.fromARGB(100, 0, 0, 0),
+                  blurRadius: 6,
+                  offset: Offset(0, 2))
             ]),
         height: 60,
         child: TextField(
@@ -74,9 +77,9 @@ Widget buildPassword() {
           ),
           decoration: const InputDecoration(
               border: InputBorder.none,
-              contentPadding: EdgeInsets.only(top: 14),
-              prefixIcon: Icon(Icons.lock, color: Color(0xff274053)),
-              hintText: 'Password',
+              contentPadding: EdgeInsets.only(top: 14.0),
+              prefixIcon: Icon(Icons.switch_left, color: Color(0xff274053)),
+              hintText: 'Right User',
               hintStyle: TextStyle(color: Colors.black38)),
         ),
       )
@@ -90,7 +93,7 @@ Widget buildLoginBtn(context) {
     width: double.infinity,
     child: ElevatedButton(
       child: const Text(
-        'LOGIN',
+        'MATCH',
         style: TextStyle(
           color: Color(0xff274053),
           fontSize: 18,
@@ -100,11 +103,11 @@ Widget buildLoginBtn(context) {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MatchPage()),
+          MaterialPageRoute(builder: (context) => Home()),
         );
       },
       style: ElevatedButton.styleFrom(
-        primary: Colors.white,
+        primary: Colors.yellow[700],
         padding: const EdgeInsets.all(15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       ),
@@ -124,18 +127,19 @@ Widget buildLoginPage(context) {
             Container(
               height: double.infinity,
               width: double.infinity,
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color(0x11274053),
-                    Color(0x55274053),
-                    Color(0xbb274053),
-                    Color(0xff274053),
-                  ],
-                ),
-              ),
+              color: Colors.white60,
+              // decoration: const BoxDecoration(
+              //   gradient: LinearGradient(
+              //     begin: Alignment.topCenter,
+              //     end: Alignment.bottomCenter,
+              //     colors: [
+              //       Color(0x11274053),
+              //       Color(0x55274053),
+              //       Color(0xbb274053),
+              //       Color(0xff274053),
+              //     ],
+              //   ),
+              // ),
               child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 25,
@@ -145,13 +149,12 @@ Widget buildLoginPage(context) {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Container(
-                      child:
-                          Image(image: AssetImage('img/detectaball_logo.png')),
+                      child: Image(image: AssetImage('img/ball.png')),
                     ),
                     SizedBox(height: 10),
-                    buildEmail(),
+                    buildLeftUser(),
                     SizedBox(height: 10),
-                    buildPassword(),
+                    buildRightUser(),
                     SizedBox(height: 10),
                     buildLoginBtn(context),
                     // TextField(
@@ -180,17 +183,47 @@ Widget buildLoginPage(context) {
   );
 }
 
-class LoginPage extends StatelessWidget {
+class MatchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.black87,
+        foregroundColor: Colors.white,
         shadowColor: Colors.blueGrey,
-        backgroundColor: Colors.white60,
-        title: const Text('Login Page'),
+        backgroundColor: Color.fromARGB(255, 81, 94, 104),
+        title: const Text('Add Match'),
       ),
       body: buildLoginPage(context),
+      bottomNavigationBar: BottomNavigationBar(items: [
+        BottomNavigationBarItem(
+          icon: Icon(
+            Icons.add,
+            color: Colors.blueGrey,
+          ),
+          label: ('add'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(
+            Icons.record_voice_over,
+            color: Colors.blueGrey,
+          ),
+          label: ('add'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(
+            Icons.calendar_today,
+            color: Colors.blueGrey,
+          ),
+          label: ('add'),
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(
+            Icons.account_box,
+            color: Colors.blueGrey,
+          ),
+          label: ('add'),
+        ),
+      ]),
     );
   }
 }
