@@ -1,5 +1,4 @@
-// import 'dart:js';
-import 'Home.dart';
+import '../Home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -93,7 +92,7 @@ Widget buildLoginBtn(context) {
     width: double.infinity,
     child: ElevatedButton(
       child: const Text(
-        'MATCH',
+        'ADD MATCH',
         style: TextStyle(
           color: Color(0xff274053),
           fontSize: 18,
@@ -191,39 +190,44 @@ class MatchPage extends StatelessWidget {
         foregroundColor: Colors.white,
         shadowColor: Colors.blueGrey,
         backgroundColor: Color.fromARGB(255, 81, 94, 104),
-        title: const Text('Add Match'),
+        title: const Text('Referee'),
       ),
       body: buildLoginPage(context),
-      bottomNavigationBar: BottomNavigationBar(items: [
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.add,
-            color: Colors.blueGrey,
-          ),
-          label: ('add'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.record_voice_over,
-            color: Colors.blueGrey,
-          ),
-          label: ('add'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.calendar_today,
-            color: Colors.blueGrey,
-          ),
-          label: ('add'),
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(
-            Icons.account_box,
-            color: Colors.blueGrey,
-          ),
-          label: ('add'),
-        ),
-      ]),
+      bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: Color.fromARGB(255, 81, 94, 104),
+          selectedItemColor: Colors.yellow[700],
+          unselectedItemColor: Colors.grey,
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.add,
+                //color: Colors.blueGrey,
+              ),
+              label: ('add'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.record_voice_over,
+                //color: Colors.blueGrey,
+              ),
+              label: ('add'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.calendar_today,
+                //color: Colors.blueGrey,
+              ),
+              label: ('add'),
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.account_box,
+                //color: Colors.blueGrey,
+              ),
+              label: ('add'),
+            ),
+          ]),
     );
   }
 }

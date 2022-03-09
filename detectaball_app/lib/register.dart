@@ -2,7 +2,7 @@ import 'package:detectaball_app/start.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'login.dart';
-import 'profile.dart';
+import 'pages/profile.dart';
 
 final TextEditingController myController3 = new TextEditingController();
 final TextEditingController myController4 = new TextEditingController();

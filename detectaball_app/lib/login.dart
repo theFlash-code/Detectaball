@@ -1,6 +1,6 @@
 // import 'dart:js';
 import 'Home.dart';
-import 'Match.dart';
+import 'pages/PracticeMatch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
