@@ -1,4 +1,3 @@
-// import 'dart:js';
 import '../Home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -87,7 +86,7 @@ Widget buildRightUser() {
   );
 }
 
-Widget buildMatchBtn(context) {
+Widget buildLoginBtn(context) {
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 25),
     width: double.infinity,
@@ -117,7 +116,7 @@ Widget buildMatchBtn(context) {
   );
 }
 
-Widget buildPracticeMatchPage(context) {
+Widget buildLoginPage(context) {
   return Scaffold(
     body: AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
@@ -127,7 +126,7 @@ Widget buildPracticeMatchPage(context) {
             Container(
               height: double.infinity,
               width: double.infinity,
-              color: Color.fromARGB(148, 255, 255, 255),
+              color: Colors.white60,
               // decoration: const BoxDecoration(
               //   gradient: LinearGradient(
               //     begin: Alignment.topCenter,
@@ -156,7 +155,7 @@ Widget buildPracticeMatchPage(context) {
                     SizedBox(height: 10),
                     buildRightUser(),
                     SizedBox(height: 10),
-                    buildMatchBtn(context),
+                    buildLoginBtn(context),
                     // TextField(
                     //   controller: myController,
                     //   decoration: InputDecoration(hintText: 'Account'),
@@ -183,14 +182,7 @@ Widget buildPracticeMatchPage(context) {
   );
 }
 
-class MatchPage extends StatefulWidget {
-  @override
-  _MatchPageState createState() => _MatchPageState();
-}
-
-class _MatchPageState extends State<MatchPage> {
-  int index = 0;
-
+class TrainingMatchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -198,56 +190,73 @@ class _MatchPageState extends State<MatchPage> {
         foregroundColor: Colors.white,
         shadowColor: Colors.blueGrey,
         backgroundColor: Color.fromARGB(255, 81, 94, 104),
-        title: const Text('Practice'),
+        title: const Text('Training Mode'),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Color.fromARGB(255, 81, 94, 104),
-          selectedItemColor: Colors.yellow[700],
-          unselectedItemColor: Colors.grey,
-          currentIndex: index,
-          onTap: (int idx) {
-            setState(() {
-              index = idx;
-            });
-          },
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.add,
-                //color: Colors.blueGrey,
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.dark,
+        child: GestureDetector(
+          child: Stack(
+            children: [
+              Container(
+                height: double.infinity,
+                width: double.infinity,
+                color: Colors.white60,
+                // decoration: const BoxDecoration(
+                //   gradient: LinearGradient(
+                //     begin: Alignment.topCenter,
+                //     end: Alignment.bottomCenter,
+                //     colors: [
+                //       Color(0x11274053),
+                //       Color(0x55274053),
+                //       Color(0xbb274053),
+                //       Color(0xff274053),
+                //     ],
+                //   ),
+                // ),
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 25,
+                    vertical: 120,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        child: Image(image: AssetImage('img/ball.png')),
+                      ),
+                      SizedBox(height: 10),
+                      buildLeftUser(),
+                      SizedBox(height: 10),
+                      buildRightUser(),
+                      SizedBox(height: 10),
+                      buildLoginBtn(context),
+                      // TextField(
+                      //   controller: myController,
+                      //   decoration: InputDecoration(hintText: 'Account'),
+                      // ),
+                      // TextField(
+                      //   controller: myController2,
+                      //   decoration: InputDecoration(hintText: 'Password'),
+                      // ),
+                      // ElevatedButton(
+                      //   child: Text('登入'),
+                      // onPressed: btnEvent,
+                      // style: ElevatedButton.styleFrom(
+                      //   primary: Colors.orange,
+                      // ),
+                      // ),
+                    ],
+                  ),
+                ),
               ),
-              label: ('Practice'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.record_voice_over,
-                //color: Colors.blueGrey,
-              ),
-              label: ('Referee'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.calendar_today,
-                // color: Colors.blueGrey,
-              ),
-              label: ('Record'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.account_box,
-                //color: Colors.blueGrey,
-              ),
-              label: ('Profile'),
-            ),
-          ]),
-      body: buildPracticeMatchPage(context),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
-
-// class MatchPage extends StatelessWidget {
-//   int index = 0;
+// class RefereePage extends StatelessWidget {
 //   @override
 //   Widget build(BuildContext context) {
 //     return Scaffold(
@@ -255,7 +264,7 @@ class _MatchPageState extends State<MatchPage> {
 //         foregroundColor: Colors.white,
 //         shadowColor: Colors.blueGrey,
 //         backgroundColor: Color.fromARGB(255, 81, 94, 104),
-//         title: const Text('Practice'),
+//         title: const Text('Referee'),
 //       ),
 //       body: buildLoginPage(context),
 //       bottomNavigationBar: BottomNavigationBar(
@@ -263,38 +272,34 @@ class _MatchPageState extends State<MatchPage> {
 //           backgroundColor: Color.fromARGB(255, 81, 94, 104),
 //           selectedItemColor: Colors.yellow[700],
 //           unselectedItemColor: Colors.grey,
-//           currentIndex: index,
-//           onTap: (int idx) {
-//             index = idx;
-//           },
 //           items: [
 //             BottomNavigationBarItem(
 //               icon: Icon(
 //                 Icons.add,
 //                 //color: Colors.blueGrey,
 //               ),
-//               label: ('Practice'),
+//               label: ('add'),
 //             ),
 //             BottomNavigationBarItem(
 //               icon: Icon(
 //                 Icons.record_voice_over,
 //                 //color: Colors.blueGrey,
 //               ),
-//               label: ('Referee'),
+//               label: ('add'),
 //             ),
 //             BottomNavigationBarItem(
 //               icon: Icon(
 //                 Icons.calendar_today,
-//                 // color: Colors.blueGrey,
+//                 //color: Colors.blueGrey,
 //               ),
-//               label: ('Record'),
+//               label: ('add'),
 //             ),
 //             BottomNavigationBarItem(
 //               icon: Icon(
 //                 Icons.account_box,
 //                 //color: Colors.blueGrey,
 //               ),
-//               label: ('Profile'),
+//               label: ('add'),
 //             ),
 //           ]),
 //     );

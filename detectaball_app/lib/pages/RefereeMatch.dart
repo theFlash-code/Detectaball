@@ -182,7 +182,7 @@ Widget buildLoginPage(context) {
   );
 }
 
-class MatchPage extends StatelessWidget {
+class RefereePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -190,47 +190,121 @@ class MatchPage extends StatelessWidget {
         foregroundColor: Colors.white,
         shadowColor: Colors.blueGrey,
         backgroundColor: Color.fromARGB(255, 81, 94, 104),
-        title: const Text('Referee'),
+        title: const Text('Referee Mode'),
       ),
-      body: buildLoginPage(context),
-      bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Color.fromARGB(255, 81, 94, 104),
-          selectedItemColor: Colors.yellow[700],
-          unselectedItemColor: Colors.grey,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.add,
-                //color: Colors.blueGrey,
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.dark,
+        child: GestureDetector(
+          child: Stack(
+            children: [
+              Container(
+                height: double.infinity,
+                width: double.infinity,
+                color: Colors.white60,
+                // decoration: const BoxDecoration(
+                //   gradient: LinearGradient(
+                //     begin: Alignment.topCenter,
+                //     end: Alignment.bottomCenter,
+                //     colors: [
+                //       Color(0x11274053),
+                //       Color(0x55274053),
+                //       Color(0xbb274053),
+                //       Color(0xff274053),
+                //     ],
+                //   ),
+                // ),
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 25,
+                    vertical: 120,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        child: Image(image: AssetImage('img/ball.png')),
+                      ),
+                      SizedBox(height: 10),
+                      buildLeftUser(),
+                      SizedBox(height: 10),
+                      buildRightUser(),
+                      SizedBox(height: 10),
+                      buildLoginBtn(context),
+                      // TextField(
+                      //   controller: myController,
+                      //   decoration: InputDecoration(hintText: 'Account'),
+                      // ),
+                      // TextField(
+                      //   controller: myController2,
+                      //   decoration: InputDecoration(hintText: 'Password'),
+                      // ),
+                      // ElevatedButton(
+                      //   child: Text('登入'),
+                      // onPressed: btnEvent,
+                      // style: ElevatedButton.styleFrom(
+                      //   primary: Colors.orange,
+                      // ),
+                      // ),
+                    ],
+                  ),
+                ),
               ),
-              label: ('add'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.record_voice_over,
-                //color: Colors.blueGrey,
-              ),
-              label: ('add'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.calendar_today,
-                //color: Colors.blueGrey,
-              ),
-              label: ('add'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.account_box,
-                //color: Colors.blueGrey,
-              ),
-              label: ('add'),
-            ),
-          ]),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
+// class RefereePage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         foregroundColor: Colors.white,
+//         shadowColor: Colors.blueGrey,
+//         backgroundColor: Color.fromARGB(255, 81, 94, 104),
+//         title: const Text('Referee'),
+//       ),
+//       body: buildLoginPage(context),
+//       bottomNavigationBar: BottomNavigationBar(
+//           type: BottomNavigationBarType.fixed,
+//           backgroundColor: Color.fromARGB(255, 81, 94, 104),
+//           selectedItemColor: Colors.yellow[700],
+//           unselectedItemColor: Colors.grey,
+//           items: [
+//             BottomNavigationBarItem(
+//               icon: Icon(
+//                 Icons.add,
+//                 //color: Colors.blueGrey,
+//               ),
+//               label: ('add'),
+//             ),
+//             BottomNavigationBarItem(
+//               icon: Icon(
+//                 Icons.record_voice_over,
+//                 //color: Colors.blueGrey,
+//               ),
+//               label: ('add'),
+//             ),
+//             BottomNavigationBarItem(
+//               icon: Icon(
+//                 Icons.calendar_today,
+//                 //color: Colors.blueGrey,
+//               ),
+//               label: ('add'),
+//             ),
+//             BottomNavigationBarItem(
+//               icon: Icon(
+//                 Icons.account_box,
+//                 //color: Colors.blueGrey,
+//               ),
+//               label: ('add'),
+//             ),
+//           ]),
+//     );
+//   }
+// }
 
 void btnEvent() {
   print(myController.text);

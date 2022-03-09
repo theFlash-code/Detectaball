@@ -1,8 +1,9 @@
 // import 'dart:js';
 import 'Home.dart';
-import 'pages/PracticeMatch.dart';
+import 'pages/TrainingMatch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'BottomNavigationBar.dart';
 
 final TextEditingController myController = new TextEditingController();
 final TextEditingController myController2 = new TextEditingController();
@@ -100,11 +101,11 @@ Widget buildLoginBtn(context) {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => MatchPage()),
+          MaterialPageRoute(builder: (context) => BottomNavigationController()),
         );
       },
       style: ElevatedButton.styleFrom(
-        primary: Colors.white,
+        primary: Colors.yellow[700],
         padding: const EdgeInsets.all(15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       ),
@@ -185,9 +186,9 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: Colors.black87,
+        foregroundColor: Colors.white,
         shadowColor: Colors.blueGrey,
-        backgroundColor: Colors.white60,
+        backgroundColor: Color.fromARGB(255, 81, 94, 104),
         title: const Text('Login Page'),
       ),
       body: buildLoginPage(context),

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'pages/PracticeMatch.dart';
+import 'pages/TrainingMatch.dart';
 import 'pages/RefereeMatch.dart';
-import 'pages/Profile.dart';
+import 'pages/profile2.dart';
+import 'pages/Record.dart';
 
 class BottomNavigationController extends StatefulWidget {
   @override
@@ -12,26 +13,26 @@ class BottomNavigationController extends StatefulWidget {
 class _BottomNavigationControllerState
     extends State<BottomNavigationController> {
   int _currentIndex = 0;
-  final pages = [profile()];
+  final pages = [
+    TrainingMatchPage(),
+    RefereePage(),
+    RecordPage(),
+    ProfilePage()
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        foregroundColor: Colors.white,
-        shadowColor: Colors.blueGrey,
-        backgroundColor: Color.fromARGB(255, 81, 94, 104),
-        title: const Text('Practice'),
-      ),
+      body: pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
           backgroundColor: Color.fromARGB(255, 81, 94, 104),
           selectedItemColor: Colors.yellow[700],
           unselectedItemColor: Colors.grey,
-          currentIndex: index,
+          currentIndex: _currentIndex,
           onTap: (int idx) {
             setState(() {
-              index = idx;
+              _currentIndex = idx;
             });
           },
           items: [
@@ -54,7 +55,7 @@ class _BottomNavigationControllerState
                 Icons.calendar_today,
                 // color: Colors.blueGrey,
               ),
-              label: ('Record'),
+              label: ('History'),
             ),
             BottomNavigationBarItem(
               icon: Icon(
@@ -64,7 +65,6 @@ class _BottomNavigationControllerState
               label: ('Profile'),
             ),
           ]),
-      body: buildPracticeMatchPage(context),
     );
   }
 }
