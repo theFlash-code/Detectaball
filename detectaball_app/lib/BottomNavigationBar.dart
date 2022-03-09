@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'pages/TrainingMatch.dart';
 import 'pages/RefereeMatch.dart';
 import 'pages/profile2.dart';
+import 'pages/profileScreen.dart';
 import 'pages/Record.dart';
 
 class BottomNavigationController extends StatefulWidget {
@@ -17,7 +18,7 @@ class _BottomNavigationControllerState
     TrainingMatchPage(),
     RefereePage(),
     RecordPage(),
-    ProfilePage()
+    ProfileScreen()
   ];
 
   @override
@@ -41,7 +42,7 @@ class _BottomNavigationControllerState
                 Icons.add,
                 //color: Colors.blueGrey,
               ),
-              label: ('Practice'),
+              label: ('Training'),
             ),
             BottomNavigationBarItem(
               icon: Icon(

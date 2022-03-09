@@ -5,6 +5,7 @@ class RecordPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         foregroundColor: Colors.white,
         shadowColor: Colors.blueGrey,
         backgroundColor: Color.fromARGB(255, 81, 94, 104),
