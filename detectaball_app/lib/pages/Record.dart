@@ -3,25 +3,23 @@ import 'package:flutter/material.dart';
 class RecordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        foregroundColor: Colors.white,
-        shadowColor: Colors.blueGrey,
-        backgroundColor: Color.fromARGB(255, 81, 94, 104),
-        title: Text('History'),
-      ),
-      body: ListView(
-        children: List.generate(15, (idx) {
-          return Card(
-            child: Container(
-              height: 150,
-              color: Color.fromARGB(255, 230, 230, 230),
-              child: Text('$idx'),
-            ),
-          );
-        }),
-      ),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+          appBar: AppBar(
+            automaticallyImplyLeading: false,
+            foregroundColor: Colors.white,
+            shadowColor: Colors.blueGrey,
+            backgroundColor: Color.fromARGB(255, 81, 94, 104),
+            title: Text('Your History'),
+            bottom: TabBar(tabs: [Tab(text: 'Training'), Tab(text: 'Referee')]),
+          ),
+          body: TabBarView(
+            children: [
+              Center(child: Text('Training')),
+              Center(child: Text('Referee'))
+            ],
+          )),
     );
   }
 }

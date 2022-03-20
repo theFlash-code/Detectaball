@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'pages/TrainingMatch.dart';
 import 'pages/RefereeMatch.dart';
-import 'pages/profile2.dart';
+//import 'pages/profile2.dart';
 import 'pages/profileScreen.dart';
 import 'pages/Record.dart';
 
@@ -46,7 +46,7 @@ class _BottomNavigationControllerState
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.record_voice_over,
+                Icons.video_call,
                 //color: Colors.blueGrey,
               ),
               label: ('Referee'),
