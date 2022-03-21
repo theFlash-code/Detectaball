@@ -27,7 +27,7 @@ class _BottomNavigationControllerState
       body: pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Color.fromARGB(255, 81, 94, 104),
+          backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
           selectedItemColor: Colors.yellow[700],
           unselectedItemColor: Colors.grey,
           currentIndex: _currentIndex,

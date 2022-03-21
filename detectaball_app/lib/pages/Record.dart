@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'TrainingRecord.dart';
+import 'RefereeRecord.dart';
 
 class RecordPage extends StatelessWidget {
   @override
@@ -10,15 +12,12 @@ class RecordPage extends StatelessWidget {
             automaticallyImplyLeading: false,
             foregroundColor: Colors.white,
             shadowColor: Colors.blueGrey,
-            backgroundColor: Color.fromARGB(255, 81, 94, 104),
+            backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
             title: Text('Your History'),
             bottom: TabBar(tabs: [Tab(text: 'Training'), Tab(text: 'Referee')]),
           ),
           body: TabBarView(
-            children: [
-              Center(child: Text('Training')),
-              Center(child: Text('Referee'))
-            ],
+            children: [TrainingRecordPage(), RefereeRecordPage()],
           )),
     );
   }
