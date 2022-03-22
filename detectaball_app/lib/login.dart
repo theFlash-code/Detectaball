@@ -1,7 +1,9 @@
 // import 'dart:js';
 import 'Home.dart';
+import 'pages/TrainingMatch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'BottomNavigationBar.dart';
 
 final TextEditingController myController = new TextEditingController();
 final TextEditingController myController2 = new TextEditingController();
@@ -99,11 +101,11 @@ Widget buildLoginBtn(context) {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Home()),
+          MaterialPageRoute(builder: (context) => BottomNavigationController()),
         );
       },
       style: ElevatedButton.styleFrom(
-        primary: Colors.white,
+        primary: Colors.yellow[700],
         padding: const EdgeInsets.all(15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       ),
@@ -184,10 +186,10 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        foregroundColor: const Color.fromARGB(221, 61, 35, 0),
-        shadowColor: const Color.fromARGB(255, 255, 41, 41),
-        backgroundColor: Color.fromARGB(197, 255, 195, 137),
-        title: const Text('Detectaball'),
+        foregroundColor: Colors.white,
+        shadowColor: Colors.blueGrey,
+        backgroundColor: Color.fromARGB(255, 81, 94, 104),
+        title: const Text('Login Page'),
       ),
       body: buildLoginPage(context),
     );

@@ -20,7 +20,7 @@ Widget buildLoginBtn(context) {
       child: const Text(
         'LOGIN',
         style: TextStyle(
-          color: Colors.white,
+          color: Color(0xff274053),
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
@@ -33,7 +33,7 @@ Widget buildLoginBtn(context) {
         );
       },
       style: ElevatedButton.styleFrom(
-        primary: Color.fromARGB(255, 255, 160, 0),
+        primary: Colors.yellow[700],
         padding: const EdgeInsets.all(15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       ),
@@ -89,7 +89,7 @@ class _startState extends State<start> {
                       Color(0x11274053),
                       Color(0x55274053),
                       Color(0xbb274053),
-                      Color(0xff274053),
+                      Color.fromARGB(255, 81, 94, 104),
                     ],
                   ),
                 ),
