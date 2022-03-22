@@ -12,17 +12,104 @@ class TrainingRecordPage extends StatelessWidget {
       //   backgroundColor: Color.fromARGB(255, 81, 94, 104),
       //   title: Text('Your History'),
       // ),
-      body: ListView(
-        children: List.generate(15, (idx) {
-          return Card(
-            child: Container(
-              height: 150,
-              color: Color.fromARGB(255, 230, 230, 230),
-              child: Text('$idx'),
+      body: ListView(children: [
+        Container(
+          margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: Color.fromARGB(159, 191, 195, 202)),
+          child: ListTile(
+            contentPadding:
+                EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+            title: Text(
+              'September 10, 2000',
+              style: TextStyle(fontWeight: FontWeight.bold),
             ),
-          );
-        }),
-      ),
+            subtitle: Row(
+              children: <Widget>[
+                Icon(Icons.linear_scale,
+                    color: Color.fromARGB(255, 236, 177, 26)),
+                Icon(Icons.linear_scale,
+                    color: Color.fromARGB(255, 236, 177, 26)),
+                Text(" 21:17")
+              ],
+            ),
+            leading: Container(
+                padding: EdgeInsets.only(right: 12.0),
+                decoration: new BoxDecoration(
+                    border: new Border(right: new BorderSide(width: 1.0))),
+                child: Icon(Icons.sports_tennis)),
+            trailing: IconButton(icon: Icon(Icons.videocam), onPressed: () {}),
+            onTap: () {},
+            onLongPress: () {},
+            dense: true,
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 10, right: 10, top: 10),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: Color.fromARGB(159, 191, 195, 202)),
+          child: ListTile(
+            contentPadding:
+                EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+            title: Text(
+              'September 10, 2000',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Row(
+              children: <Widget>[
+                Icon(Icons.linear_scale,
+                    color: Color.fromARGB(255, 236, 177, 26)),
+                Icon(Icons.linear_scale,
+                    color: Color.fromARGB(255, 236, 177, 26)),
+                Text(" 21:17")
+              ],
+            ),
+            leading: Container(
+                padding: EdgeInsets.only(left: 10, right: 10, top: 10),
+                decoration: new BoxDecoration(
+                    border: new Border(right: new BorderSide(width: 1.0))),
+                child: Icon(Icons.sports_tennis)),
+            trailing: IconButton(icon: Icon(Icons.videocam), onPressed: () {}),
+            onTap: () {},
+            onLongPress: () {},
+            dense: true,
+          ),
+        ),
+        Container(
+          margin: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              color: Color.fromARGB(159, 191, 195, 202)),
+          child: ListTile(
+            contentPadding:
+                EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+            title: Text(
+              'September 10, 2000',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Row(
+              children: <Widget>[
+                Icon(Icons.linear_scale,
+                    color: Color.fromARGB(255, 236, 177, 26)),
+                Icon(Icons.linear_scale,
+                    color: Color.fromARGB(255, 236, 177, 26)),
+                Text(" 21:17")
+              ],
+            ),
+            leading: Container(
+                padding: EdgeInsets.only(right: 12.0),
+                decoration: new BoxDecoration(
+                    border: new Border(right: new BorderSide(width: 1.0))),
+                child: Icon(Icons.sports_tennis)),
+            trailing: IconButton(icon: Icon(Icons.videocam), onPressed: () {}),
+            onTap: () {},
+            onLongPress: () {},
+            dense: true,
+          ),
+        )
+      ]),
     );
   }
 }

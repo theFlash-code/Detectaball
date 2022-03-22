@@ -190,7 +190,7 @@ class TrainingMatchPage extends StatelessWidget {
         automaticallyImplyLeading: false,
         foregroundColor: Colors.white,
         shadowColor: Colors.blueGrey,
-        backgroundColor: Color.fromARGB(255, 81, 94, 104),
+        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
         title: const Text('Training Mode'),
       ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
@@ -204,20 +204,27 @@ class TrainingMatchPage extends StatelessWidget {
                 color: Colors.white60,
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 25,
-                    vertical: 120,
+                    horizontal: 30,
+                    vertical: 90,
                   ),
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(
-                        child: Image(image: AssetImage('img/ball.png')),
+                        child: Image(
+                          image: AssetImage('img/table-tennis-3.png'),
+                          //scale: 2.0,
+                          fit: BoxFit.fill,
+                        ),
+                        width: 137.0,
+                        height: 137.0,
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 35),
                       buildLeftUser(),
-                      SizedBox(height: 10),
+                      SizedBox(height: 15),
                       buildRightUser(),
-                      SizedBox(height: 10),
+                      SizedBox(height: 15),
                       buildLoginBtn(context),
                     ],
                   ),
