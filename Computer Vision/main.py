@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import imutils
 
 global l_dx
 global l_dy
@@ -39,11 +40,11 @@ def draw_direction(img, lx, ly, nx, ny):
 
 frameWidth = 640
 frameHeight = 480
-cap = cv2.VideoCapture("E:\\Programming\\flutter\\Detectaball_vid\\table_tennis1.mp4")
+cap = cv2.VideoCapture("../../Detectaball_vid/table_tennis1.mp4")
 cap.set(3, frameWidth)
 cap.set(4, frameHeight)
 cap.set(10, 80)
-pulse_ms = 300
+pulse_ms = 3
 
 
 # cv2.namedWindow("HSV")
@@ -66,6 +67,7 @@ lastPos_y = 0
 while True:
     _, img = cap.read()
 
+    img = imutils.resize(img, width=1080)
     imgHsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
     # h_min = cv2.getTrackbarPos("HUE Min", "HSV")

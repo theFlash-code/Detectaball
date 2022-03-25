@@ -4,7 +4,7 @@ import imutils
 
 frameWidth = 320
 frameHeight = 240
-cap = cv2.VideoCapture("E:\\Programming\\flutter\\Detectaball_vid\\table_tennis1.mp4")
+cap = cv2.VideoCapture("../../Detectaball_vid/table_tennis1.mp4")
 cap.set(3, frameWidth)
 cap.set(4, frameHeight)
 cap.set(1, 8)
