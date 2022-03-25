@@ -39,7 +39,7 @@ def draw_direction(img, lx, ly, nx, ny):
 
 frameWidth = 640
 frameHeight = 480
-cap = cv2.VideoCapture("C:\\Users\\Administration\\Desktop\\test\\table5.mp4")
+cap = cv2.VideoCapture("E:\\Programming\\flutter\\Detectaball_vid\\table_tennis1.mp4")
 cap.set(3, frameWidth)
 cap.set(4, frameHeight)
 cap.set(10, 80)
