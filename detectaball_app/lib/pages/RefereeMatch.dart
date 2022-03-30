@@ -190,7 +190,11 @@ class RefereePage extends StatelessWidget {
         automaticallyImplyLeading: false,
         foregroundColor: Colors.white,
         shadowColor: Colors.blueGrey,
+<<<<<<< Updated upstream
         backgroundColor: Color.fromARGB(255, 81, 94, 104),
+=======
+        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
+>>>>>>> Stashed changes
         title: const Text('Referee Mode'),
       ),
       body: AnnotatedRegion<SystemUiOverlayStyle>(
@@ -216,13 +220,19 @@ class RefereePage extends StatelessWidget {
                 // ),
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(
+<<<<<<< Updated upstream
                     horizontal: 25,
                     vertical: 120,
+=======
+                    horizontal: 30,
+                    vertical: 90,
+>>>>>>> Stashed changes
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Container(
+<<<<<<< Updated upstream
                         child: Image(image: AssetImage('img/ball.png')),
                       ),
                       SizedBox(height: 10),
@@ -230,6 +240,21 @@ class RefereePage extends StatelessWidget {
                       SizedBox(height: 10),
                       buildRightUser(),
                       SizedBox(height: 10),
+=======
+                        child: Image(
+                          image: AssetImage('img/scoreboard-2.png'),
+                          //scale: 2.0,
+                          fit: BoxFit.fill,
+                        ),
+                        width: 137.0,
+                        height: 137.0,
+                      ),
+                      SizedBox(height: 35),
+                      buildLeftUser(),
+                      SizedBox(height: 15),
+                      buildRightUser(),
+                      SizedBox(height: 15),
+>>>>>>> Stashed changes
                       buildLoginBtn(context),
                       // TextField(
                       //   controller: myController,

@@ -14,9 +14,29 @@ class RefereeRecordPage extends StatelessWidget {
       // ),
       body: ListView(children: [
         ListTile(
+<<<<<<< Updated upstream
           title: Text('September 10, 2000'),
           subtitle: Text('Demo subtitle'),
           leading: Icon(Icons.sports_tennis),
+=======
+          contentPadding:
+              EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+          title: Text(
+            'September 10, 2000',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          subtitle: Row(
+            children: <Widget>[
+              Icon(Icons.linear_scale, color: Colors.yellow[700]),
+              Text(" 21:17")
+            ],
+          ),
+          leading: Container(
+              padding: EdgeInsets.only(right: 12.0),
+              decoration: new BoxDecoration(
+                  border: new Border(right: new BorderSide(width: 1.0))),
+              child: Icon(Icons.sports_score)),
+>>>>>>> Stashed changes
           trailing: Icon(Icons.videocam),
           onTap: () {},
           onLongPress: () {},
