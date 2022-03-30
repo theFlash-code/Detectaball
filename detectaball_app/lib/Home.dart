@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
     final List<Widget> images = [
       GestureDetector(
         onTap: () {
-          print("Click event on Container");
+          print("Tapped a Contain");
         },
         child: Container(
           decoration: BoxDecoration(

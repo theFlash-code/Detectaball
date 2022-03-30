@@ -1,7 +1,9 @@
 // import 'dart:js';
 import 'Home.dart';
+import 'pages/TrainingMatch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'BottomNavigationBar.dart';
 
 final TextEditingController myController = new TextEditingController();
 final TextEditingController myController2 = new TextEditingController();
@@ -99,11 +101,11 @@ Widget buildLoginBtn(context) {
       onPressed: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Home()),
+          MaterialPageRoute(builder: (context) => BottomNavigationController()),
         );
       },
       style: ElevatedButton.styleFrom(
-        primary: Colors.white,
+        primary: Colors.yellow[700],
         padding: const EdgeInsets.all(15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       ),
@@ -113,7 +115,7 @@ Widget buildLoginBtn(context) {
   );
 }
 
-Widget buildHomePage(context) {
+Widget buildLoginPage(context) {
   return Scaffold(
     body: AnnotatedRegion<SystemUiOverlayStyle>(
       value: SystemUiOverlayStyle.dark,
@@ -128,8 +130,8 @@ Widget buildHomePage(context) {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Color(0x66274053),
-                    Color(0x77274053),
+                    Color(0x11274053),
+                    Color(0x55274053),
                     Color(0xbb274053),
                     Color(0xff274053),
                   ],
@@ -138,7 +140,7 @@ Widget buildHomePage(context) {
               child: SingleChildScrollView(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 25,
-                  vertical: 200,
+                  vertical: 120,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -182,14 +184,14 @@ Widget buildHomePage(context) {
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        // appBar: AppBar(
-        //   backgroundColor: Color(0x66274053),
-        //   title: Text('Detectaball'),
-        // ),
-        body: buildHomePage(context),
+    return Scaffold(
+      appBar: AppBar(
+        foregroundColor: Colors.white,
+        shadowColor: Colors.blueGrey,
+        backgroundColor: Color.fromARGB(255, 81, 94, 104),
+        title: const Text('Login Page'),
       ),
+      body: buildLoginPage(context),
     );
   }
 }
