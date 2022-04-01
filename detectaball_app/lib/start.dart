@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'Bpage.dart';
 import 'login.dart';
+import 'logintest.dart';
 import 'register.dart';
 import 'Home.dart';
 
@@ -29,7 +30,7 @@ Widget buildLoginBtn(context) {
         print('start');
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => LoginPage()),
+          MaterialPageRoute(builder: (context) => LoginPage2()),
         );
       },
       style: ElevatedButton.styleFrom(
@@ -89,7 +90,7 @@ class _startState extends State<start> {
                       Color(0x11274053),
                       Color(0x55274053),
                       Color(0xbb274053),
-                      Color.fromARGB(255, 81, 94, 104),
+                      Color.fromRGBO(58, 66, 86, 1.0),
                     ],
                   ),
                 ),

@@ -1,4 +1,6 @@
 // import 'dart:js';
+import 'dart:io';
+
 import 'Home.dart';
 import 'pages/TrainingMatch.dart';
 import 'package:flutter/material.dart';
@@ -181,17 +183,75 @@ Widget buildLoginPage(context) {
   );
 }
 
-class LoginPage extends StatelessWidget {
+class InputWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        foregroundColor: Colors.white,
-        shadowColor: Colors.blueGrey,
-        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
-        title: const Text('Login Page'),
+    return Padding(
+      padding: EdgeInsets.all(30),
+      child: Column(
+        children: <Widget>[
+          Container(
+            child: Image(image: AssetImage('img/detectaball_logo.png')),
+          ),
+          SizedBox(height: 10),
+          buildEmail(),
+          SizedBox(height: 10),
+          buildPassword(),
+          SizedBox(height: 40),
+          Text(
+            'Skip Login',
+            style: TextStyle(color: Colors.grey),
+          ),
+          buildLoginBtn(context),
+        ],
       ),
-      body: buildLoginPage(context),
+    );
+  }
+}
+
+class LP extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      body: Container(
+        width: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(begin: Alignment.topCenter, colors: [
+            Color.fromARGB(255, 49, 57, 75),
+            Color.fromARGB(255, 49, 57, 75),
+            Color.fromARGB(255, 49, 57, 75),
+            Color.fromARGB(255, 49, 57, 75),
+          ]),
+        ),
+        child: Column(children: <Widget>[
+          SizedBox(
+            height: 200,
+          ),
+          //Header(),
+          Expanded(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(60),
+                  topRight: Radius.circular(60),
+                ),
+              ),
+              child: InputWrapper(),
+            ),
+          )
+        ]),
+      ),
+    );
+  }
+}
+
+class LoginPage2 extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: LP(),
     );
   }
 }
