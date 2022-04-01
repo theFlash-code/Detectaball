@@ -1,4 +1,7 @@
+import 'package:detectaball_app/pages/Helper_center.dart';
+import 'package:detectaball_app/pages/About_us.dart';
 import 'package:flutter/material.dart';
+import '../start.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -80,7 +83,12 @@ class Body extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => About_us()),
+                  );
+                },
                 child: Row(
                   children: [
                     Icon(Icons.share, color: Colors.blueGrey),
@@ -115,7 +123,12 @@ class Body extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15)),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Helper_center()),
+                  );
+                },
                 child: Row(
                   children: [
                     Icon(Icons.help_center, color: Colors.blueGrey),
@@ -150,7 +163,12 @@ class Body extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(25)),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => start()),
+                  );
+                },
                 child: Row(
                   children: [
                     //Icon(Icons.share, color: Colors.blueGrey),

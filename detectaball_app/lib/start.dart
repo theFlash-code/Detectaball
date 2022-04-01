@@ -26,7 +26,7 @@ Widget buildLoginBtn(context) {
         ),
       ),
       onPressed: () {
-        print('hello sherry');
+        print('start');
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => LoginPage()),
