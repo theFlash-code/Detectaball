@@ -5,6 +5,7 @@ import 'login.dart';
 import 'logintest.dart';
 import 'register.dart';
 import 'Home.dart';
+import 'widget/custom_page_route.dart';
 
 class start extends StatefulWidget {
   const start({Key? key}) : super(key: key);
@@ -28,9 +29,11 @@ Widget buildLoginBtn(context) {
       ),
       onPressed: () {
         print('start');
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => LoginPage2()),
+        Navigator.of(context).push(
+          CustomPageRoute(
+            child: LoginPage2(),
+            direction: AxisDirection.up,
+          ),
         );
       },
       style: ElevatedButton.styleFrom(
@@ -87,10 +90,10 @@ class _startState extends State<start> {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Color(0x11274053),
-                      Color(0x55274053),
-                      Color(0xbb274053),
-                      Color.fromRGBO(58, 66, 86, 1.0),
+                      Color.fromARGB(255, 225, 230, 243),
+                      Color.fromARGB(255, 119, 130, 156),
+                      Color.fromARGB(255, 85, 96, 122),
+                      Color.fromARGB(255, 49, 57, 75),
                     ],
                   ),
                 ),
@@ -123,6 +126,12 @@ class _startState extends State<start> {
                       const SizedBox(height: 10),
                       buildLoginBtn(context),
                       buildRegisterBtn(context),
+                      const SizedBox(height: 10),
+                      Text(
+                        'Skip Login',
+                        style: TextStyle(
+                            color: Colors.grey, fontWeight: FontWeight.normal),
+                      ),
                     ],
                   ),
                 ),

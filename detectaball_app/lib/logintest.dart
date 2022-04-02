@@ -1,5 +1,4 @@
-// import 'dart:js';
-import 'dart:io';
+import 'package:detectaball_app/start.dart';
 
 import 'Home.dart';
 import 'pages/TrainingMatch.dart';
@@ -96,7 +95,7 @@ Widget buildLoginBtn(context) {
         'LOGIN',
         style: TextStyle(
           color: Color(0xff274053),
-          fontSize: 18,
+          fontSize: 22,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -155,7 +154,7 @@ Widget buildLoginPage(context) {
                     buildEmail(),
                     SizedBox(height: 10),
                     buildPassword(),
-                    SizedBox(height: 10),
+                    SizedBox(height: 20),
                     buildLoginBtn(context),
                     // TextField(
                     //   controller: myController,
@@ -183,6 +182,52 @@ Widget buildLoginPage(context) {
   );
 }
 
+class Header extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.all(20),
+      child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Center(
+              child: Container(
+                child: Image(
+                  image: AssetImage('img/icon(white).png'),
+                  //scale: 2.0,
+                  fit: BoxFit.fill,
+                ),
+                width: 150.0,
+                height: 105.0,
+              ),
+            ),
+            // Center(
+            //   child: Text(
+            //     'Login',
+            //     style: TextStyle(
+            //         color: Colors.white,
+            //         fontSize: 40,
+            //         fontWeight: FontWeight.w500),
+            //   ),
+            // ),
+            // SizedBox(
+            //   height: 3,
+            // ),
+            // Center(
+            //   child: Text(
+            //     'Welcome to Detectabll',
+            //     style: TextStyle(
+            //       color: Colors.white,
+            //       fontSize: 18,
+            //     ),
+            //   ),
+            // ),
+            SizedBox(height: 5),
+          ]),
+    );
+  }
+}
+
 class InputWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -190,18 +235,36 @@ class InputWrapper extends StatelessWidget {
       padding: EdgeInsets.all(30),
       child: Column(
         children: <Widget>[
-          Container(
-            child: Image(image: AssetImage('img/detectaball_logo.png')),
-          ),
           SizedBox(height: 10),
+          Center(
+            child: Text(
+              'Login',
+              style: TextStyle(
+                  color: Color.fromRGBO(58, 66, 86, 1.0),
+                  fontSize: 45,
+                  fontWeight: FontWeight.bold),
+            ),
+          ),
+          SizedBox(height: 5),
+          Center(
+            child: Text(
+              'Welcome to Detectabll',
+              style: TextStyle(
+                color: Color.fromRGBO(58, 66, 86, 1.0),
+                fontSize: 18,
+              ),
+            ),
+          ),
+          SizedBox(height: 20),
           buildEmail(),
           SizedBox(height: 10),
           buildPassword(),
-          SizedBox(height: 40),
+          SizedBox(height: 20),
           Text(
-            'Skip Login',
+            'Forget Password?',
             style: TextStyle(color: Colors.grey),
           ),
+          SizedBox(height: 30),
           buildLoginBtn(context),
         ],
       ),
@@ -225,9 +288,9 @@ class LP extends StatelessWidget {
         ),
         child: Column(children: <Widget>[
           SizedBox(
-            height: 200,
+            height: 50,
           ),
-          //Header(),
+          Header(),
           Expanded(
             child: Container(
               decoration: BoxDecoration(

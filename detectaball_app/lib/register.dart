@@ -93,7 +93,7 @@ Widget buildRegisterBtn(context) {
       child: const Text(
         'Sign Up',
         style: TextStyle(
-          color: Colors.white,
+          color: Color(0xff274053),
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
@@ -108,7 +108,7 @@ Widget buildRegisterBtn(context) {
         print('sign up');
       },
       style: ElevatedButton.styleFrom(
-        primary: Color.fromARGB(255, 255, 160, 0),
+        primary: Colors.yellow[700],
         padding: const EdgeInsets.all(15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       ),
@@ -144,10 +144,10 @@ class registerPage extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Color(0x11274053),
-                      Color(0x55274053),
-                      Color(0xbb274053),
-                      Color(0xff274053),
+                      Color.fromARGB(255, 225, 230, 243),
+                      Color.fromARGB(255, 119, 130, 156),
+                      Color.fromARGB(255, 85, 96, 122),
+                      Color.fromARGB(255, 49, 57, 75),
                     ],
                   ),
                 ),
