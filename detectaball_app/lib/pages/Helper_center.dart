@@ -80,7 +80,7 @@ class Helper_center extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
+        //automaticallyImplyLeading: false,
         backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
         title: Text('Helper Center'),
       ),
