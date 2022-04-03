@@ -248,7 +248,7 @@ class InputWrapper extends StatelessWidget {
           SizedBox(height: 5),
           Center(
             child: Text(
-              'Welcome to Detectabll',
+              'Welcome to Detectaball',
               style: TextStyle(
                 color: Color.fromRGBO(58, 66, 86, 1.0),
                 fontSize: 18,

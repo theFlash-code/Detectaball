@@ -14,17 +14,59 @@ class Body extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               height: 30,
+            ),SizedBox(
+              width: 320,
+              child: Text(
+                ' Detectaball is a school project made by 4 university student.',
+                style: TextStyle(
+                  color: Color(0xff274053),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
-            // SizedBox(
-            //   child: Text(
-            //     'Please contact us by Email.',
-            //     style: TextStyle(
-            //       color: Color(0xff274053),
-            //       fontSize: 20,
-            //       fontWeight: FontWeight.w500,
-            //     ),
-            //   ),
-            // ),
+            SizedBox(
+              width: double.infinity,
+              height: 30,
+            ),SizedBox(
+              width: 320,
+              child: Text(
+                ' We aim for making a mobile app to be used as an intelligent scoreboard, so that the player will no longer be frustrated when they forgot what\'s the score.',
+                style: TextStyle(
+                  color: Color(0xff274053),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              height: 30,
+            ),SizedBox(
+              width: 320,
+              child: Text(
+                ' In addition, we want to provide an analytic system to let the user know their strengths and weaknesses, thereby allowing them to improve their performance.',
+                style: TextStyle(
+                  color: Color(0xff274053),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+             SizedBox(
+              width: double.infinity,
+              height: 30,
+            ),SizedBox(
+              width: 320,
+              child: Text(
+                'If you are interested in our project, please visit:\nhttps://github.com/theFlash-code/Detectaball',
+                style: TextStyle(
+                  color: Color(0xff274053),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
             SizedBox(
               width: double.infinity,
               height: 10,
@@ -43,11 +85,11 @@ class Body extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      'Github ',
+                      'https://github.com/theFlash-code/Detectaball',
                       style: TextStyle(
                         color: Color(0xff274053),
-                        fontSize: 20,
-                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                        fontWeight: FontWeight.normal,
                       ),
                     ),
                     SizedBox(width: 45),

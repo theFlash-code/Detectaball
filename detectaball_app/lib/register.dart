@@ -144,10 +144,10 @@ class registerPage extends StatelessWidget {
                     begin: Alignment.topCenter,
                     end: Alignment.bottomCenter,
                     colors: [
-                      Color.fromARGB(255, 225, 230, 243),
-                      Color.fromARGB(255, 119, 130, 156),
-                      Color.fromARGB(255, 85, 96, 122),
-                      Color.fromARGB(255, 49, 57, 75),
+                      Color.fromRGBO(58, 66, 86, 1.0),
+                      Color.fromRGBO(58, 66, 86, 1.0),
+                      Color.fromRGBO(58, 66, 86, 1.0),
+                      Color.fromRGBO(58, 66, 86, 1.0),
                     ],
                   ),
                 ),
@@ -164,7 +164,7 @@ class registerPage extends StatelessWidget {
                           //     //image: AssetImage('img/detectaball_logo.png')
                           //     ),
                           ),
-                      const SizedBox(height: 60),
+                      const SizedBox(height: 50),
                       buildUserName(),
                       const SizedBox(height: 10),
                       buildEmail(),

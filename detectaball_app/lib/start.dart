@@ -17,10 +17,10 @@ class start extends StatefulWidget {
 Widget buildLoginBtn(context) {
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 10),
-    width: double.infinity,
+    width: 300,
     child: ElevatedButton(
       child: const Text(
-        'LOGIN',
+        'START',
         style: TextStyle(
           color: Color(0xff274053),
           fontSize: 18,
@@ -48,7 +48,7 @@ Widget buildLoginBtn(context) {
 Widget buildRegisterBtn(context) {
   return Container(
     padding: const EdgeInsets.symmetric(vertical: 10),
-    width: double.infinity,
+    width: 300,
     child: ElevatedButton(
       child: const Text(
         'Sign Up',
@@ -85,34 +85,50 @@ class _startState extends State<start> {
               Container(
                 height: double.infinity,
                 width: double.infinity,
-                decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color.fromARGB(255, 225, 230, 243),
-                      Color.fromARGB(255, 119, 130, 156),
-                      Color.fromARGB(255, 85, 96, 122),
-                      Color.fromARGB(255, 49, 57, 75),
-                    ],
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("img/start2.png"),
+                    fit: BoxFit.cover,
                   ),
                 ),
+                // decoration: const BoxDecoration(
+                //   gradient: LinearGradient(
+                //     begin: Alignment.topCenter,
+                //     end: Alignment.bottomCenter,
+                //     colors: [
+                //       Color.fromARGB(255, 225, 230, 243),
+                //       Color.fromARGB(255, 119, 130, 156),
+                //       Color.fromARGB(255, 85, 96, 122),
+                //       Color.fromARGB(255, 49, 57, 75),
+                //     ],
+                //   ),
+                // ),
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 25,
+                    horizontal: 30,
                     vertical: 180,
                   ),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(
-                        child: const Image(
-                          image: AssetImage("img/detectaball_icon.png"),
+                        child: Image(
+                          image: AssetImage('img/icon(white).png'),
+                          //scale: 2.0,
+                          fit: BoxFit.fill,
                         ),
+                        width: 210.0,
+                        height: 147.0,
                       ),
+                      // Container(
+                      //   child: const Image(
+                      //     image: AssetImage("img/icon(white).png"),
+                      //   ),
+                      // ),
                       Container(
                         child: const Image(
-                          image: AssetImage("img/detectaball_word.png"),
+                          image: AssetImage("img/word(white).png"),
                         ),
                       ),
                       // const Text(
@@ -123,14 +139,15 @@ class _startState extends State<start> {
                       //     fontWeight: FontWeight.bold,
                       //   ),
                       // ),
-                      const SizedBox(height: 10),
+                      const SizedBox(height: 70),
                       buildLoginBtn(context),
+                      const SizedBox(height: 17),
                       buildRegisterBtn(context),
                       const SizedBox(height: 10),
                       Text(
                         'Skip Login',
                         style: TextStyle(
-                            color: Colors.grey, fontWeight: FontWeight.normal),
+                            color: Colors.white, fontWeight: FontWeight.normal),
                       ),
                     ],
                   ),
