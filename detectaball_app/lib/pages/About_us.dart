@@ -1,5 +1,6 @@
 import 'package:detectaball_app/start.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 // import 'package:url_lan'
 
 class Body extends StatelessWidget {
@@ -14,7 +15,8 @@ class Body extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               height: 30,
-            ),SizedBox(
+            ),
+            SizedBox(
               width: 320,
               child: Text(
                 ' Detectaball is a school project made by 4 university student.',
@@ -28,7 +30,8 @@ class Body extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               height: 30,
-            ),SizedBox(
+            ),
+            SizedBox(
               width: 320,
               child: Text(
                 ' We aim for making a mobile app to be used as an intelligent scoreboard, so that the player will no longer be frustrated when they forgot what\'s the score.',
@@ -42,7 +45,8 @@ class Body extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               height: 30,
-            ),SizedBox(
+            ),
+            SizedBox(
               width: 320,
               child: Text(
                 ' In addition, we want to provide an analytic system to let the user know their strengths and weaknesses, thereby allowing them to improve their performance.',
@@ -53,17 +57,30 @@ class Body extends StatelessWidget {
                 ),
               ),
             ),
-             SizedBox(
+            SizedBox(
               width: double.infinity,
               height: 30,
-            ),SizedBox(
+            ),
+            SizedBox(
               width: 320,
               child: Text(
-                'If you are interested in our project, please visit:\nhttps://github.com/theFlash-code/Detectaball',
+                'If you are interested in our project, please visit:',
                 style: TextStyle(
                   color: Color(0xff274053),
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            SizedBox(
+              width: 320,
+              child: Text(
+                'https://github.com/theFlash-code/Detectaball',
+                style: TextStyle(
+                  color: Color(0xff274053),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                  decoration: TextDecoration.underline,
                 ),
               ),
             ),
@@ -81,14 +98,18 @@ class Body extends StatelessWidget {
                   //   shape: RoundedRectangleBorder(
                   //       borderRadius: BorderRadius.circular(15)),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  final url = 'https://github.com/theFlash-code/Detectaball';
+
+                  openBrowserURL(url: url, inApp: true);
+                },
                 child: Row(
                   children: [
                     Text(
-                      'https://github.com/theFlash-code/Detectaball',
+                      'Source Code',
                       style: TextStyle(
-                        color: Color(0xff274053),
-                        fontSize: 12,
+                        color: Colors.grey,
+                        fontSize: 20,
                         fontWeight: FontWeight.normal,
                       ),
                     ),
@@ -127,6 +148,20 @@ class About_us extends StatelessWidget {
         title: Text('About us'),
       ),
       body: Body(),
+    );
+  }
+}
+
+Future openBrowserURL({
+  required String url,
+  bool inApp = false,
+}) async {
+  if (await canLaunch(url)) {
+    await launch(
+      url,
+      forceSafariVC: inApp, // iOS
+      forceWebView: inApp, //Android
+      enableJavaScript: true, //Android
     );
   }
 }

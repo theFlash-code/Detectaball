@@ -1,5 +1,6 @@
 import 'package:detectaball_app/start.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 // import 'package:url_lan'
 
 class Body extends StatelessWidget {
@@ -39,7 +40,16 @@ class Body extends StatelessWidget {
                   //   shape: RoundedRectangleBorder(
                   //       borderRadius: BorderRadius.circular(15)),
                 ),
-                onPressed: () {},
+                onPressed: () async {
+                  final toEmail = 'wasw0523@gmail.com';
+                  final subject = '\(Feedback for Detectabll app\)';
+                  final message = '';
+                  final url =
+                      'mailto:$toEmail?subject=${Uri.encodeFull(subject)}&body=${Uri.encodeFull(message)}';
+                  if (await canLaunch(url)) {
+                    await launch(url);
+                  }
+                },
                 child: Row(
                   children: [
                     Text(
