@@ -1,6 +1,6 @@
 import 'package:detectaball_app/start.dart';
 
-import 'Home.dart';
+import 'register.dart';
 import 'pages/TrainingMatch.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -113,6 +113,88 @@ Widget buildLoginBtn(context) {
 
       // padding: EdgeInsets.all,
     ),
+  );
+}
+
+Widget build_Forget_Password(context) {
+  return GestureDetector(
+    onTap: () => print('forget password.'),
+    child: RichText(
+        text: TextSpan(children: [
+      TextSpan(
+          text: 'Forget Password? ',
+          style: TextStyle(
+            color: Colors.grey,
+            decoration: TextDecoration.underline,
+            //fontSize: 18,
+          )),
+      TextSpan(
+          text: '',
+          style: TextStyle(
+            color: Colors.grey,
+            //fontSize: 18,
+            //fontWeight: FontWeight.bold,
+            decoration: TextDecoration.underline,
+          ))
+    ])),
+  );
+}
+
+Widget build_Register(context) {
+  return GestureDetector(
+    onTap: () {
+      print('Register');
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => registerPage()),
+      );
+    },
+    child: RichText(
+        text: TextSpan(children: [
+      TextSpan(
+          text: 'Don\'t have an account? ',
+          style: TextStyle(
+            color: Colors.grey,
+            //fontSize: 18,
+          )),
+      TextSpan(
+          text: 'Sign Up',
+          style: TextStyle(
+            color: Colors.grey,
+            //fontSize: 18,
+            //fontWeight: FontWeight.bold,
+            decoration: TextDecoration.underline,
+          ))
+    ])),
+  );
+}
+
+Widget build_Skip_loginBtn(context) {
+  return GestureDetector(
+    onTap: () {
+      print('skip login');
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => BottomNavigationController()),
+      );
+    },
+    child: RichText(
+        text: TextSpan(children: [
+      TextSpan(
+          text: '',
+          style: TextStyle(
+            color: Colors.grey,
+            //fontSize: 18,
+          )),
+      TextSpan(
+          text: 'skip login',
+          style: TextStyle(
+            color: Colors.grey,
+            //fontSize: 18,
+            //fontWeight: FontWeight.bold,
+            decoration: TextDecoration.underline,
+          ))
+    ])),
   );
 }
 
@@ -260,12 +342,16 @@ class InputWrapper extends StatelessWidget {
           SizedBox(height: 10),
           buildPassword(),
           SizedBox(height: 20),
-          Text(
-            'Forget Password?',
-            style: TextStyle(color: Colors.grey),
-          ),
+          build_Forget_Password(context),
+          SizedBox(height: 7),
+          build_Register(context),
+          // Text(
+          //   'Forget Password?',
+          //   style: TextStyle(color: Colors.grey),
+          // ),
           SizedBox(height: 30),
           buildLoginBtn(context),
+          build_Skip_loginBtn(context)
         ],
       ),
     );

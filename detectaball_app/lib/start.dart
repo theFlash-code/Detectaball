@@ -73,6 +73,28 @@ Widget buildRegisterBtn(context) {
   );
 }
 
+// Widget build_Skip_loginBtn(context) {
+//   return GestureDetector(
+//     onTap: () => print('skip login.'),
+//     child: RichText(
+//         text: TextSpan(children: [
+//       TextSpan(
+//           text: '',
+//           style: TextStyle(
+//             color: Colors.white,
+//             fontSize: 18,
+//           )),
+//       TextSpan(
+//           text: 'Sign Up',
+//           style: TextStyle(
+//             color: Colors.white,
+//             fontSize: 18,
+//             fontWeight: FontWeight.bold,
+//           ))
+//     ])),
+//   );
+// }
+
 class _startState extends State<start> {
   @override
   Widget build(BuildContext context) {
@@ -144,11 +166,12 @@ class _startState extends State<start> {
                       const SizedBox(height: 17),
                       buildRegisterBtn(context),
                       const SizedBox(height: 10),
-                      Text(
-                        'Skip Login',
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.normal),
-                      ),
+                      //build_Skip_loginBtn(context),
+                      // Text(
+                      //   'Skip Login',
+                      //   style: TextStyle(
+                      //       color: Colors.white, fontWeight: FontWeight.normal),
+                      // ),
                     ],
                   ),
                 ),
