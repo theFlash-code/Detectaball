@@ -132,11 +132,12 @@ while True:
 
     draw_direction(img, lastPos_x, lastPos_y, targetPos_x, targetPos_y)
     
+    # timeout的問題(含發球那3顆)
     if(time.time() - start > 2):
         if((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==0) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)):
             Rightpoint+=1
             print("右加分")
-        elif((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==1)) or ((Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==1)):
+        elif((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==1)) or ((Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==1)) or ((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==1)):
             Leftpoint+=1
             print("左加分")
     
