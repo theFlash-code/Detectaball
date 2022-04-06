@@ -1,15 +1,22 @@
 import cv2
 import numpy as np
+import time
 
 list = []
 list2 = []
-list3 = []
-list4 = []
+Collision = [0, 0, 0, 0]  #前三球
+Collision2 = [0, 0, 0, 0] #後面球數
+#[0]:左拍, [1]:右拍, [2]:左桌, [3]:右桌
+Leftpoint = 0
+Rightpoint = 0
+start = time.time()
+
 def empty(a):
     pass
 
 
 def draw_direction(img, lx, ly, nx, ny):
+    global count, start
     dx = nx - lx
     dy = ny - ly
     if abs(dx) < 4 and abs(dy) < 4:
@@ -19,41 +26,58 @@ def draw_direction(img, lx, ly, nx, ny):
         r = (dx**2 + dy**2)**0.5
         dx = int(dx/r*40)
         dy = int(dy/r*40)
-        print(dx, dy)
+        # print(dx, dy)
 
-        # 偵測桌子碰撞------------------------------------------------------------------
+        # 偵測桌子碰撞---------------------------------------------------------------
         if(len(list) != 0):
             if(list[0] > 0 and dy < 0):
                 if((list2[0] > 0 and dx < 0) or (list2[0] < 0 and dx > 0)):
                     print(0)
                 elif(lx<320):#左邊
-                    cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (255, 255, 0), 2)
-                    print(list2[0])
+                    count += 1
+                    Collision[2] += 1
+                    if(count>3):
+                        Collision2[2] += 1
+                    print(Collision2)
+                    cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (100, 0, 100), 2)
                 else:        #右邊
+                    count += 1
+                    Collision[3] += 1
+                    if(count>3):
+                        Collision2[3] += 1
+                    print(Collision2)
                     cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (255, 255, 0), 2)
-        #------------------------------------------------------------------------------
-        #偵測跟球拍碰撞-----------------------------------------------------------------
-        # if(len(list2) != 0):
-        #     if((list2[0] <= 0 and dx >= 0)):
-        #         print(0)
-        #         if(nx<320):
-        #             cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (255, 255, 255), 2)
-        #     elif((list2[0] >= 0 and dx <= 0)):
-        #         if(lx>320):
-        #             cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (0, 255, 255), 2)
-        #------------------------------------------------------------------------------
+                start = time.time()
+        #---------------------------------------------------------------------------
+        #偵測跟球拍碰撞--------------------------------------------------------------
+        if(len(list2) != 0):
+            if((list2[0] <= 0 and dx >= 0)):#左邊
+                if(nx<320):
+                    count += 1
+                    Collision[0] += 1
+                    if(count>3):
+                        Collision2[0] += 1
+                    print(Collision2)
+                    cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (255, 255, 255), 2)
+            elif((list2[0] >= 0 and dx <= 0)):
+                if(lx>320):#右邊
+                    count += 1
+                    Collision[1] += 1
+                    if(count>3):
+                        Collision2[1] += 1
+                    print(Collision2)
+                    cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (0, 255, 255), 2)
+            start = time.time()
+        #---------------------------------------------------------------------------
         if(len(list) != 0):
             list.remove(list[0])
         if(len(list2) != 0):
             list2.remove(list2[0])
         list.append(dy)
         list2.append(dx)
-        list3.append(dy)
-        list4.append(dx)
         
     cv2.arrowedLine(img, (60, 100), (60+dx, 100+dy), (0, 255, 0), 2)
-
-
+    
 frameWidth = 640
 frameHeight = 480
 cap = cv2.VideoCapture("C:\\Users\\Administration\\Desktop\\test\\table5.mp4")
@@ -64,7 +88,7 @@ cap.set(10, 80)
 pulse_ms = 30
 
 
-lower = np.array([4, 180, 156])
+lower = np.array([4, 180, 220])
 upper = np.array([32, 255, 255])
 
 targetPos_x = 0
@@ -72,6 +96,11 @@ targetPos_y = 0
 lastPos_x = 0
 lastPos_y = 0
 
+count = 0
+CountTableLeft = 0
+CountTableRight = 0
+CountRacketLeft = 0
+CountRacketRight = 0
 while True:
     _, img = cap.read()
 
@@ -84,39 +113,71 @@ while True:
 
 
     x, y, w, h = 0, 0, 0, 0
-    #球桌可用------------------------------
-    for cnt in contours:
-        area = cv2.contourArea(cnt)
+
+    if len(contours) != 0: 
+        cnt = contours[0]
+    area = cv2.contourArea(cnt)
         # print(area)
-        if area > 0:
-            x, y, w, h = cv2.boundingRect(cnt)
-            lastPos_x = targetPos_x
-            lastPos_y = targetPos_y
-            targetPos_x = int(x+w/2)
-            targetPos_y = int(y+h/2)
-            cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
-            cv2.circle(img, (targetPos_x, targetPos_y), 2, (0, 255, 0), 4)
-    #--------------------------------------
-    #球拍可用------------------------------
-    # if len(contours) != 0: 
-    #     cnt = contours[0]
-    # area = cv2.contourArea(cnt)
-    #     # print(area)
-    # if area > 0:
-    #     x, y, w, h = cv2.boundingRect(cnt)
-    #     lastPos_x = targetPos_x
-    #     lastPos_y = targetPos_y
-    #     targetPos_x = int(x+w/2)
-    #     targetPos_y = int(y+h/2)
-    #     cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
-    #     cv2.circle(img, (targetPos_x, targetPos_y), 2, (0, 255, 0), 4)
-    #---------------------------------------
-    cv2.putText(img, "({:0<2d}, {:0<2d})".format(targetPos_x, targetPos_y), (20, 30),
-                cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 2) 
+    if area > 0:
+        x, y, w, h = cv2.boundingRect(cnt)
+        lastPos_x = targetPos_x
+        lastPos_y = targetPos_y
+        targetPos_x = int(x+w/2)
+        targetPos_y = int(y+h/2)
+        cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
+        cv2.circle(img, (targetPos_x, targetPos_y), 2, (0, 255, 0), 4)
+        
+    cv2.putText(img, "({:0<2d}, {:0<2d})".format(targetPos_x, targetPos_y), (20, 30), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 2) 
+    
+
     draw_direction(img, lastPos_x, lastPos_y, targetPos_x, targetPos_y)
+    
+    if(time.time() - start > 2):
+        if((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==0) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)):
+            Rightpoint+=1
+            print("右加分")
+        elif((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==1)) or ((Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==1)):
+            Leftpoint+=1
+            print("左加分")
+    
+    #如果是右邊發球
+    if(count <= 3 and count > 0):#前三球(含發球)
+        if(((Collision[0]==0) and (Collision[1]==1) and (Collision[2]==0) and (Collision[3]==0)) or ((Collision[0]==0) and (Collision[1]==1) and (Collision[2]==0) and (Collision[3]==1))
+        or ((Collision[0]==0) and (Collision[1]==1) and (Collision[2]==0) and (Collision[3]==1))):
+            print('前3球正常')
+        elif(Collision[0]==0) and (Collision[1]==1) and (Collision[2]==1) and (Collision[3]==1):
+            # start = time.time()
+            # if((time.time() - start) > 3):
+            print('繼續')
+            
+        else:
+            Leftpoint += 1
+    #還沒處理發球得分之狀況
+    if(count > 3):               #後面
+        if(((Collision2[0]==0) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0))
+        or ((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==1)) or ((Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==1))):
+            print('繼續')
+        elif(Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==1) and (Collision2[3]==1):
+            Collision2[0]=0
+            Collision2[1]=0
+            Collision2[2]=0
+            Collision2[3]=0
+        elif(Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==1) and (Collision2[3]==0):
+            Rightpoint += 1
+            Collision2[0]=0
+            Collision2[1]=0
+            Collision2[2]=0
+            Collision2[3]=0
+            #尚未處理右邊的人沒打到的狀況
+        elif(Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==2):
+            Leftpoint += 1
+            Collision2[0]=0
+            Collision2[1]=0
+            Collision2[2]=0
+            Collision2[3]=0
 
+    cv2.putText(img, "{:0<2d}:{:0<2d}".format(Leftpoint, Rightpoint), (310, 30), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 2) 
     imgStack = np.hstack([img, imgOutput])
-
     cv2.imshow('Horizontal Stacking', imgStack)
     if cv2.waitKey(pulse_ms) & 0xFF == ord('q'):
         print("Quit\n")
