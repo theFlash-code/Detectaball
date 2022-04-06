@@ -80,13 +80,12 @@ def draw_direction(img, lx, ly, nx, ny):
     
 frameWidth = 640
 frameHeight = 480
-cap = cv2.VideoCapture("C:\\Users\\Administration\\Desktop\\test\\table5.mp4")
+cap = cv2.VideoCapture("C:\\Users\\ASUS PRO\\Desktop\\專題\\DetectaBall\\程式碼\\table9.mp4")
 cap.set(3, frameWidth)
 cap.set(4, frameHeight)
 cap.set(10, 80)
 # cap.set(cv2.CAP_PROP_FPS, 10)
 pulse_ms = 30
-
 
 lower = np.array([4, 180, 220])
 upper = np.array([32, 255, 255])
@@ -131,51 +130,90 @@ while True:
     
 
     draw_direction(img, lastPos_x, lastPos_y, targetPos_x, targetPos_y)
-    
+    #----------------------
+    #如果是左邊發球
     # timeout的問題(含發球那3顆)
     if(time.time() - start > 2):
-        if((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==0) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)):
+        if((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==1) and (Collision2[3]==0)) or ((Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==1) and (Collision2[3]==0)) or ((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==1) and (Collision2[3]==0)):
             Rightpoint+=1
             print("右加分")
-        elif((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==1)) or ((Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==1)) or ((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==1)):
+        elif((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==0) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)):
             Leftpoint+=1
             print("左加分")
-    
-    #如果是右邊發球
-    if(count <= 3 and count > 0):#前三球(含發球)
-        if(((Collision[0]==0) and (Collision[1]==1) and (Collision[2]==0) and (Collision[3]==0)) or ((Collision[0]==0) and (Collision[1]==1) and (Collision[2]==0) and (Collision[3]==1))
-        or ((Collision[0]==0) and (Collision[1]==1) and (Collision[2]==0) and (Collision[3]==1))):
-            print('前3球正常')
-        elif(Collision[0]==0) and (Collision[1]==1) and (Collision[2]==1) and (Collision[3]==1):
-            # start = time.time()
-            # if((time.time() - start) > 3):
-            print('繼續')
             
+    if(count <= 3 and count > 0):#前三球(含發球)
+        if(((Collision[0]==0) and (Collision[1]==0) and (Collision[2]==0) and (Collision[3]==0)) or ((Collision[0]==1) and (Collision[1]==0) and (Collision[2]==0) and (Collision[3]==0))
+        or ((Collision[0]==1) and (Collision[1]==0) and (Collision[2]==1) and (Collision[3]==0))):
+            print('前3球正常')
+        elif(Collision[0]==1) and (Collision[1]==0) and (Collision[2]==1) and (Collision[3]==1):
+            print('繼續')
         else:
-            Leftpoint += 1
-    #還沒處理發球得分之狀況
+            Rightpoint += 1
+            
     if(count > 3):               #後面
-        if(((Collision2[0]==0) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0))
-        or ((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==1)) or ((Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==1))):
+        if(((Collision2[0]==0) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==0))
+        or ((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==1) and (Collision2[3]==0)) or ((Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==1) and (Collision2[3]==0))):
             print('繼續')
         elif(Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==1) and (Collision2[3]==1):
             Collision2[0]=0
             Collision2[1]=0
             Collision2[2]=0
             Collision2[3]=0
-        elif(Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==1) and (Collision2[3]==0):
+        elif(Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==2) and (Collision2[3]==0):
             Rightpoint += 1
             Collision2[0]=0
             Collision2[1]=0
             Collision2[2]=0
             Collision2[3]=0
-            #尚未處理右邊的人沒打到的狀況
-        elif(Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==2):
+        elif(Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==1):
             Leftpoint += 1
             Collision2[0]=0
             Collision2[1]=0
             Collision2[2]=0
             Collision2[3]=0
+    #----------------------------------
+    # #如果是右邊發球
+    # timeout的問題(含發球那3顆)
+    # if(time.time() - start > 2):
+    #     if((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==0) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)):
+    #         Rightpoint+=1
+    #         print("右加分")
+    #     elif((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==1)) or ((Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==1)) or ((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==1)):
+    #         Leftpoint+=1
+    #         print("左加分")
+    #---------------------------------
+    # 
+    # if(count <= 3 and count > 0):#前三球(含發球)
+    #     if(((Collision[0]==0) and (Collision[1]==1) and (Collision[2]==0) and (Collision[3]==0)) or ((Collision[0]==0) and (Collision[1]==1) and (Collision[2]==0) and (Collision[3]==1))
+    #     or ((Collision[0]==0) and (Collision[1]==0) and (Collision[2]==0) and (Collision[3]==0))):
+    #         print('前3球正常')
+    #     elif(Collision[0]==0) and (Collision[1]==1) and (Collision[2]==1) and (Collision[3]==1):
+    #         print('繼續')
+            
+    #     else:
+    #         Leftpoint += 1
+    # #還沒處理發球得分之狀況
+    # if(count > 3):               #後面
+    #     if(((Collision2[0]==0) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0))
+    #     or ((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==1)) or ((Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==1))):
+    #         print('繼續')
+    #     elif(Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==1) and (Collision2[3]==1):
+    #         Collision2[0]=0
+    #         Collision2[1]=0
+    #         Collision2[2]=0
+    #         Collision2[3]=0
+    #     elif(Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==1) and (Collision2[3]==0):
+    #         Rightpoint += 1
+    #         Collision2[0]=0
+    #         Collision2[1]=0
+    #         Collision2[2]=0
+    #         Collision2[3]=0
+    #     elif(Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==2):
+    #         Leftpoint += 1
+    #         Collision2[0]=0
+    #         Collision2[1]=0
+    #         Collision2[2]=0
+    #         Collision2[3]=0
 
     cv2.putText(img, "{:0<2d}:{:0<2d}".format(Leftpoint, Rightpoint), (310, 30), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 2) 
     imgStack = np.hstack([img, imgOutput])
