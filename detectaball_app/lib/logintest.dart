@@ -122,7 +122,7 @@ Widget build_Forget_Password(context) {
     child: RichText(
         text: TextSpan(children: [
       TextSpan(
-          text: 'Forget Password? ',
+          text: 'Forget your password? ',
           style: TextStyle(
             color: Colors.grey,
             decoration: TextDecoration.underline,

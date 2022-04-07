@@ -73,12 +73,16 @@ class Body extends StatelessWidget {
               ),
             ),
             SizedBox(
+              width: double.infinity,
+              height: 20,
+            ),
+            SizedBox(
               width: 320,
               child: Text(
                 'https://github.com/theFlash-code/Detectaball',
                 style: TextStyle(
                   color: Color(0xff274053),
-                  fontSize: 20,
+                  fontSize: 18,
                   fontWeight: FontWeight.w500,
                   decoration: TextDecoration.underline,
                 ),
@@ -90,7 +94,7 @@ class Body extends StatelessWidget {
             ),
             SizedBox(
               height: 72,
-              width: double.infinity,
+              width: 320,
               child: TextButton(
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.all(20),

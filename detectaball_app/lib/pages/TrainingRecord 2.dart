@@ -5,6 +5,13 @@ class TrainingRecordPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(
+      //   automaticallyImplyLeading: false,
+      //   foregroundColor: Colors.white,
+      //   shadowColor: Colors.blueGrey,
+      //   backgroundColor: Color.fromARGB(255, 81, 94, 104),
+      //   title: Text('Your History'),
+      // ),
       body: ListView(children: [
         Container(
           margin: EdgeInsets.only(left: 10, right: 10, top: 20),

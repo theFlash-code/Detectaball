@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "497705912262",
+    "project_id": "detectable-c9bb7",
+    "storage_bucket": "detectable-c9bb7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:497705912262:android:535024c8c56cdd16a2d4c7",
+        "android_client_info": {
+          "package_name": "com.example.detectaball_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "497705912262-5pu21ugr199v73ce169kglti8flf2snt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzGewE0ChK4GBqOe2U5jYLgXxlAQLLuVM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "497705912262-5pu21ugr199v73ce169kglti8flf2snt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
