@@ -2,10 +2,17 @@ import 'package:flutter/material.dart';
 import 'Bpage.dart';
 import 'start.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'config/config.dart';
 
+final configurations = Configurations();
 Future<void> main() async {
-  // WidgetsFlutterBinding.ensureInitialized();
-  // await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+      options: FirebaseOptions(
+          apiKey: configurations.apiKey,
+          appId: configurations.appId,
+          messagingSenderId: configurations.messagingSenderId,
+          projectId: configurations.projectId));
   runApp(MyApp());
 }
 
