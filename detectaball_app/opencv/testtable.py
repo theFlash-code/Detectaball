@@ -8,7 +8,7 @@ Collision = [0, 0, 0, 0]  #前三球
 Collision2 = [0, 0, 0, 0] #後面球數
 #[0]:左拍, [1]:右拍, [2]:左桌, [3]:右桌
 Leftpoint = 15
-Rightpoint = 16
+Rightpoint = 15
 start = time.time()
 
 def empty(a):
