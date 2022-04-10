@@ -10,13 +10,14 @@ Collision2 = [0, 0, 0, 0] #後面球數
 Leftpoint = 15
 Rightpoint = 15
 start = time.time()
+game_start = False
 
 def empty(a):
     pass
 
 
 def draw_direction(img, lx, ly, nx, ny):
-    global count, start
+    global count, start, game_start
     dx = nx - lx
     dy = ny - ly
     if abs(dx) < 4 and abs(dy) < 4:
@@ -67,6 +68,7 @@ def draw_direction(img, lx, ly, nx, ny):
                         Collision2[1] += 1
                     print(Collision2)
                     cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (0, 255, 255), 2)
+            game_start = True
             start = time.time()
         #---------------------------------------------------------------------------
         if(len(list) != 0):
@@ -80,14 +82,14 @@ def draw_direction(img, lx, ly, nx, ny):
     
 frameWidth = 640
 frameHeight = 480
-cap = cv2.VideoCapture("C:\\Users\\Administration\\Desktop\\test\\table8.mp4")
+cap = cv2.VideoCapture("C:\\Users\\ASUS PRO\\Desktop\\專題\\DetectaBall\\程式碼\\table11.mp4")
 cap.set(3, frameWidth)
 cap.set(4, frameHeight)
 cap.set(10, 80)
 # cap.set(cv2.CAP_PROP_FPS, 10)
 pulse_ms = 30
 
-lower = np.array([4, 180, 220])
+lower = np.array([4, 150, 220])
 upper = np.array([32, 255, 255])
 
 targetPos_x = 0
@@ -137,7 +139,7 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
             
             #如果是右邊發球
             # timeout的問題(含發球那3顆)
-            if(time.time() - start > 2):
+            if(time.time() - start > 2 and game_start == True):
                 if((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==0) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)):
                     Rightpoint+=1
                     Collision2[0]=0
@@ -145,7 +147,7 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
                     Collision2[2]=0
                     Collision2[3]=0
                     print("右加分")
-                    break
+                    
                 elif((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==1)) or ((Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==1)) or ((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==1)):
                     Leftpoint+=1
                     Collision2[0]=0
@@ -153,7 +155,8 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
                     Collision2[2]=0
                     Collision2[3]=0
                     print("左加分")
-                    break
+                game_start = False
+                    
             
             if(count <= 3 and count > 0):#前三球(含發球)
                 if(((Collision[0]==0) and (Collision[1]==1) and (Collision[2]==0) and (Collision[3]==0)) or ((Collision[0]==0) and (Collision[1]==1) and (Collision[2]==0) and (Collision[3]==1))
@@ -230,7 +233,7 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
             #----------------------
             #如果是左邊發球
             # timeout的問題(含發球那3顆)
-            if(time.time() - start > 2):
+            if(time.time() - start > 2 and game_start == True):
                 if((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==1) and (Collision2[3]==0)) or ((Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==1) and (Collision2[3]==0)) or ((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==1) and (Collision2[3]==0)):
                     Rightpoint+=1
                     Collision2[0]=0
@@ -238,7 +241,6 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
                     Collision2[2]=0
                     Collision2[3]=0
                     print("右加分")
-                    break
                 elif((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==0) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)):
                     Leftpoint+=1
                     Collision2[0]=0
@@ -246,7 +248,8 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
                     Collision2[2]=0
                     Collision2[3]=0
                     print("左加分")
-                    break
+                
+                game_start = False
                     
             if(count <= 3 and count > 0):#前三球(含發球)
                 if(((Collision[0]==0) and (Collision[1]==0) and (Collision[2]==0) and (Collision[3]==0)) or ((Collision[0]==1) and (Collision[1]==0) and (Collision[2]==0) and (Collision[3]==0))
