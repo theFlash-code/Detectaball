@@ -8,7 +8,7 @@ cap = cv2.VideoCapture("../../Detectaball_vid/table_tennis1.mp4")
 cap.set(3, frameWidth)
 cap.set(4, frameHeight)
 cap.set(1, 8)
-pulse_ms = 5
+pulse_ms = 1
 
 while True:
     _, frame = cap.read()

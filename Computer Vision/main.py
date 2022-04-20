@@ -69,7 +69,6 @@ while True:
 
     img = imutils.resize(img, width=1080)
     imgHsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-
     # h_min = cv2.getTrackbarPos("HUE Min", "HSV")
     # h_max = cv2.getTrackbarPos("HUE Max", "HSV")
     # s_min = cv2.getTrackbarPos("SAT Min", "HSV")
