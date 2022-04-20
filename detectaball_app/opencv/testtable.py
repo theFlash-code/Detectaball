@@ -7,8 +7,8 @@ list2 = []
 Collision = [0, 0, 0, 0]  #前三球
 Collision2 = [0, 0, 0, 0] #後面球數
 #[0]:左拍, [1]:右拍, [2]:左桌, [3]:右桌
-Leftpoint = 15
-Rightpoint = 15
+Leftpoint = 0
+Rightpoint = 3
 start = time.time()
 game_start = False
 
@@ -82,14 +82,14 @@ def draw_direction(img, lx, ly, nx, ny):
     
 frameWidth = 640
 frameHeight = 480
-cap = cv2.VideoCapture("C:\\Users\\ASUS PRO\\Desktop\\專題\\DetectaBall\\程式碼\\table11.mp4")
+cap = cv2.VideoCapture("C:\\Users\\ASUS PRO\\Downloads\\table26.mp4")
 cap.set(3, frameWidth)
 cap.set(4, frameHeight)
 cap.set(10, 80)
 # cap.set(cv2.CAP_PROP_FPS, 10)
 pulse_ms = 30
 
-lower = np.array([4, 150, 220])
+lower = np.array([4, 150, 230])
 upper = np.array([32, 255, 255])
 
 targetPos_x = 0
@@ -139,7 +139,7 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
             
             #如果是右邊發球
             # timeout的問題(含發球那3顆)
-            if(time.time() - start > 2 and game_start == True):
+            if(time.time() - start > 1 and game_start == True):
                 if((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==0) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)):
                     Rightpoint+=1
                     Collision2[0]=0
@@ -233,7 +233,7 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
             #----------------------
             #如果是左邊發球
             # timeout的問題(含發球那3顆)
-            if(time.time() - start > 2 and game_start == True):
+            if(time.time() - start > 1 and game_start == True):
                 if((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==1) and (Collision2[3]==0)) or ((Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==1) and (Collision2[3]==0)) or ((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==1) and (Collision2[3]==0)):
                     Rightpoint+=1
                     Collision2[0]=0
