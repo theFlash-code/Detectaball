@@ -82,14 +82,14 @@ def draw_direction(img, lx, ly, nx, ny):
     
 frameWidth = 640
 frameHeight = 480
-cap = cv2.VideoCapture("C:\\Users\\ASUS PRO\\Downloads\\table26.mp4")
+cap = cv2.VideoCapture("C:\\Users\\ASUS PRO\\Downloads\\table28.mp4")
 cap.set(3, frameWidth)
 cap.set(4, frameHeight)
 cap.set(10, 80)
 # cap.set(cv2.CAP_PROP_FPS, 10)
 pulse_ms = 30
 
-lower = np.array([4, 150, 230])
+lower = np.array([4, 150, 240])
 upper = np.array([32, 255, 255])
 
 targetPos_x = 0
@@ -132,7 +132,7 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
                 cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
                 cv2.circle(img, (targetPos_x, targetPos_y), 2, (0, 255, 0), 4)
                 
-            cv2.putText(img, "({:0<2d}, {:0<2d})".format(targetPos_x, targetPos_y), (20, 30), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 2) 
+            # cv2.putText(img, "({:0<2d}, {:0<2d})".format(targetPos_x, targetPos_y), (20, 30), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 2) 
             
 
             draw_direction(img, lastPos_x, lastPos_y, targetPos_x, targetPos_y)
@@ -193,7 +193,15 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
                     Collision2[3]=0
                     break
 
-            cv2.putText(img, "{:d}:{:d}".format(Leftpoint, Rightpoint), (310, 30), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 2) 
+            # 記分板
+            cv2.rectangle(img, (10, 10), (150, 90), (255, 255, 255), 2)
+            cv2.line(img, (10, 50), (150, 50), (255, 255, 255), 2)  # 中間水平線
+            cv2.line(img, (110, 10), (110, 90), (255, 255, 255), 2) # 垂直分隔線
+            cv2.putText(img, "LeftPlayer", (15,35), cv2.FONT_HERSHEY_PLAIN, 1, (255, 255, 255), 2)
+            cv2.putText(img, "RightPlayer", (15,75), cv2.FONT_HERSHEY_PLAIN, 1, (255, 255, 255), 2)
+            cv2.putText(img, "{:d}".format(Leftpoint), (125,35), cv2.FONT_HERSHEY_PLAIN, 1, (255, 255, 255), 2)
+            cv2.putText(img, "{:d}".format(Rightpoint), (125,75), cv2.FONT_HERSHEY_PLAIN, 1, (255, 255, 255), 2)
+
             imgStack = np.hstack([img, imgOutput])
             cv2.imshow('Horizontal Stacking', imgStack)
             if cv2.waitKey(pulse_ms) & 0xFF == ord('q'):
@@ -226,7 +234,7 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
                 cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
                 cv2.circle(img, (targetPos_x, targetPos_y), 2, (0, 255, 0), 4)
                 
-            cv2.putText(img, "({:0<2d}, {:0<2d})".format(targetPos_x, targetPos_y), (20, 30), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 2) 
+            # cv2.putText(img, "({:0<2d}, {:0<2d})".format(targetPos_x, targetPos_y), (20, 30), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 2) 
             
 
             draw_direction(img, lastPos_x, lastPos_y, targetPos_x, targetPos_y)
@@ -285,7 +293,15 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
                     Collision2[3]=0
                     break
 
-            cv2.putText(img, "{:d} : {:d}".format(Leftpoint, Rightpoint), (310, 30), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 2) 
+            # 記分板
+            cv2.rectangle(img, (10, 10), (150, 90), (255, 255, 255), 2)
+            cv2.line(img, (10, 50), (150, 50), (255, 255, 255), 2)  # 中間水平線
+            cv2.line(img, (110, 10), (110, 90), (255, 255, 255), 2) # 垂直分隔線
+            cv2.putText(img, "LeftPlayer", (15,35), cv2.FONT_HERSHEY_PLAIN, 1, (255, 255, 255), 2)
+            cv2.putText(img, "RightPlayer", (15,75), cv2.FONT_HERSHEY_PLAIN, 1, (255, 255, 255), 2)
+            cv2.putText(img, "{:d}".format(Leftpoint), (125,35), cv2.FONT_HERSHEY_PLAIN, 1, (255, 255, 255), 2)
+            cv2.putText(img, "{:d}".format(Rightpoint), (125,75), cv2.FONT_HERSHEY_PLAIN, 1, (255, 255, 255), 2)
+            
             imgStack = np.hstack([img, imgOutput])
             cv2.imshow('Horizontal Stacking', imgStack)
             if cv2.waitKey(pulse_ms) & 0xFF == ord('q'):
