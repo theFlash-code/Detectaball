@@ -82,7 +82,7 @@ def draw_direction(img, lx, ly, nx, ny):
     
 frameWidth = 640
 frameHeight = 480
-cap = cv2.VideoCapture("C:\\Users\\ASUS PRO\\Downloads\\table28.mp4")
+cap = cv2.VideoCapture("C:\\Users\\ASUS PRO\\Downloads\\table27.mp4")
 cap.set(3, frameWidth)
 cap.set(4, frameHeight)
 cap.set(10, 80)
