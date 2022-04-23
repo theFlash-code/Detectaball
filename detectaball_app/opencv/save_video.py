@@ -5,11 +5,18 @@ list = []
 list2 = []
 list3 = []
 list4 = []
+Ltrace = False
+Rtrace = False
+
+fourcc = cv2.VideoWriter_fourcc(*'mp4v')
+out = cv2.VideoWriter('output.mp4', fourcc, 20.0, (640,  480))
+
 def empty(a):
     pass
 
 
 def draw_direction(img, lx, ly, nx, ny):
+    global Ltrace
     dx = nx - lx
     dy = ny - ly
     if abs(dx) < 4 and abs(dy) < 4:
@@ -22,25 +29,26 @@ def draw_direction(img, lx, ly, nx, ny):
         print(dx, dy)
 
         # 偵測桌子碰撞---------------------------------------------------------------
-        # if(len(list) != 0):
-        #     if(list[0] > 0 and dy < 0):
-        #         if((list2[0] > 0 and dx < 0) or (list2[0] < 0 and dx > 0)):
-        #             print(0)
-        #         elif(lx<320):#左邊
-        #             cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (255, 255, 0), 2)
-        #             print(list2[0])
-        #         else:        #右邊
-        #             cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (255, 255, 0), 2)
+        if(len(list) != 0):
+            if(list[0] > 0 and dy < 0):
+                if((list2[0] > 0 and dx < 0) or (list2[0] < 0 and dx > 0)):
+                    print(0)
+                elif(lx<320):#左邊
+                    cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (4, 150, 220), 2)
+                    Ltrace = True
+                else:        #右邊
+                    cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (255, 255, 0), 2)
+                    Ltrace = True
         #---------------------------------------------------------------------------
         #偵測跟球拍碰撞--------------------------------------------------------------
-        if(len(list2) != 0):
-            if((list2[0] <= 0 and dx >= 0)):
-                print(0)
-                if(nx<320):
-                    cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (255, 255, 255), 2)
-            elif((list2[0] >= 0 and dx <= 0)):
-                if(lx>320):
-                    cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (0, 255, 255), 2)
+        # if(len(list2) != 0):
+        #     if((list2[0] <= 0 and dx >= 0)):
+        #         print(0)
+        #         if(nx<320):
+        #             cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (255, 255, 255), 2)
+        #     elif((list2[0] >= 0 and dx <= 0)):
+        #         if(lx>320):
+        #             cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (0, 255, 255), 2)
         #---------------------------------------------------------------------------
         if(len(list) != 0):
             list.remove(list[0])
@@ -56,7 +64,7 @@ def draw_direction(img, lx, ly, nx, ny):
 
 frameWidth = 640
 frameHeight = 480
-cap = cv2.VideoCapture("C:\\Users\\Administration\\Desktop\\test\\table5.mp4")
+cap = cv2.VideoCapture(0)
 cap.set(3, frameWidth)
 cap.set(4, frameHeight)
 cap.set(10, 80)
@@ -64,7 +72,7 @@ cap.set(10, 80)
 pulse_ms = 30
 
 
-lower = np.array([4, 180, 156])
+lower = np.array([4, 150, 180])
 upper = np.array([32, 255, 255])
 
 targetPos_x = 0
@@ -72,7 +80,7 @@ targetPos_y = 0
 lastPos_x = 0
 lastPos_y = 0
 
-while True:
+while cap.isOpened():
     _, img = cap.read()
 
     imgHsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
@@ -113,14 +121,19 @@ while True:
     #---------------------------------------
     cv2.putText(img, "({:0<2d}, {:0<2d})".format(targetPos_x, targetPos_y), (20, 30),
                 cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 2) 
+    
     draw_direction(img, lastPos_x, lastPos_y, targetPos_x, targetPos_y)
+    
+    if(Ltrace == True):
+        cv2.ellipse(img, (lastPos_x, lastPos_y), (10, 5), 0, 0, 360, (205, 0, 255), 2)
+        Ltrace = False
 
     imgStack = np.hstack([img, imgOutput])
-
+    out.write(img)
     cv2.imshow('Horizontal Stacking', imgStack)
     if cv2.waitKey(pulse_ms) & 0xFF == ord('q'):
         print("Quit\n")
         break
-
 cap.release()
+out.release()
 cv2.destroyAllWindows()

@@ -1,20 +1,43 @@
 import cv2
 import numpy as np
 import time
+from pygame import mixer
+from gtts import gTTS 
 
 list = []
 list2 = []
 Collision = [0, 0, 0, 0]  #前三球
 Collision2 = [0, 0, 0, 0] #後面球數
 #[0]:左拍, [1]:右拍, [2]:左桌, [3]:右桌
-Leftpoint = 0
-Rightpoint = 3
+Leftpoint = 12
+Rightpoint = 13
 start = time.time()
 game_start = False
 
+def Speak(text):     #報比分
+    tts = gTTS(text, lang = 'en')
+    tts.save("sound.mp3")
+    mixer.init()
+    mixer.music.load("sound.mp3")
+    mixer.music.play()
+    
+def SpeakScore(l, r):
+    if((l+r)!=1 and int((l+r)/2)%2==1 and l<10 and r<10 or (l>9 and ((l+r)%2)==1 and abs(l-r)<2)):
+        text = str(l) + ' ' + str(r) + 'right serve'
+        Speak(text)
+    elif((l-r)>1 and l>9 or l==11 and r<10):
+        text = str(l) + ' ' + str(r) + 'left win, change side'
+        Speak(text)
+    elif((r-l)>1 and r>9 or r==11 and l<10):
+        text = str(l) + ' ' + str(r) + 'right win, change side'
+        Speak(text)
+    else:
+        text = str(l) + ' ' + str(r) + 'left serve'
+        Speak(text)
+    
 def empty(a):
     pass
-
+ 
 
 def draw_direction(img, lx, ly, nx, ny):
     global count, start, game_start
@@ -82,14 +105,14 @@ def draw_direction(img, lx, ly, nx, ny):
     
 frameWidth = 640
 frameHeight = 480
-cap = cv2.VideoCapture("C:\\Users\\ASUS PRO\\Downloads\\table27.mp4")
+cap = cv2.VideoCapture("C:\\Users\\ASUS PRO\\Downloads\\table26.mp4")
 cap.set(3, frameWidth)
 cap.set(4, frameHeight)
 cap.set(10, 80)
 # cap.set(cv2.CAP_PROP_FPS, 10)
-pulse_ms = 30
+pulse_ms = 65
 
-lower = np.array([4, 150, 240])
+lower = np.array([4, 150, 230])
 upper = np.array([32, 255, 255])
 
 targetPos_x = 0
@@ -147,6 +170,7 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
                     Collision2[2]=0
                     Collision2[3]=0
                     print("右加分")
+                    SpeakScore(Leftpoint, Rightpoint)
                     
                 elif((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==1)) or ((Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==1)) or ((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==1)):
                     Leftpoint+=1
@@ -155,6 +179,7 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
                     Collision2[2]=0
                     Collision2[3]=0
                     print("左加分")
+                    SpeakScore(Leftpoint, Rightpoint)
                 game_start = False
                     
             
@@ -167,7 +192,6 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
                     
                 else:
                     Leftpoint += 1
-            #還沒處理發球得分之狀況
             if(count > 3):               #後面
                 if(((Collision2[0]==0) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0))
                 or ((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==1)) or ((Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==1))):
@@ -184,6 +208,7 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
                     Collision2[1]=0
                     Collision2[2]=0
                     Collision2[3]=0
+                    SpeakScore(Leftpoint, Rightpoint)
                     break
                 elif(Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==2):
                     Leftpoint += 1
@@ -191,6 +216,7 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
                     Collision2[1]=0
                     Collision2[2]=0
                     Collision2[3]=0
+                    SpeakScore(Leftpoint, Rightpoint)
                     break
 
             # 記分板
@@ -249,6 +275,7 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
                     Collision2[2]=0
                     Collision2[3]=0
                     print("右加分")
+                    SpeakScore(Leftpoint, Rightpoint)
                 elif((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==0) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)):
                     Leftpoint+=1
                     Collision2[0]=0
@@ -256,6 +283,7 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
                     Collision2[2]=0
                     Collision2[3]=0
                     print("左加分")
+                    SpeakScore(Leftpoint, Rightpoint)
                 
                 game_start = False
                     
@@ -284,6 +312,7 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
                     Collision2[1]=0
                     Collision2[2]=0
                     Collision2[3]=0
+                    SpeakScore(Leftpoint, Rightpoint)
                     break
                 elif(Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==1):
                     Leftpoint += 1
@@ -291,6 +320,7 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
                     Collision2[1]=0
                     Collision2[2]=0
                     Collision2[3]=0
+                    SpeakScore(Leftpoint, Rightpoint)
                     break
 
             # 記分板
