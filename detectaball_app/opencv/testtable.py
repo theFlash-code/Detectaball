@@ -9,8 +9,8 @@ list2 = []
 Collision = [0, 0, 0, 0]  #前三球
 Collision2 = [0, 0, 0, 0] #後面球數
 #[0]:左拍, [1]:右拍, [2]:左桌, [3]:右桌
-Leftpoint = 12
-Rightpoint = 13
+Leftpoint = 0
+Rightpoint = 0
 start = time.time()
 game_start = False
 
@@ -63,14 +63,14 @@ def draw_direction(img, lx, ly, nx, ny):
                     if(count>3):
                         Collision2[2] += 1
                     print(Collision2)
-                    cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (100, 0, 100), 2)
+                    # cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (100, 0, 100), 2)
                 else:        #右邊
                     count += 1
                     Collision[3] += 1
                     if(count>3):
                         Collision2[3] += 1
                     print(Collision2)
-                    cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (255, 255, 0), 2)
+                    # cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (255, 255, 0), 2)
                 start = time.time()
         #---------------------------------------------------------------------------
         #偵測跟球拍碰撞--------------------------------------------------------------
@@ -82,7 +82,7 @@ def draw_direction(img, lx, ly, nx, ny):
                     if(count>3):
                         Collision2[0] += 1
                     print(Collision2)
-                    cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (255, 255, 255), 2)
+                    # cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (255, 255, 255), 2)
             elif((list2[0] >= 0 and dx <= 0)):
                 if(lx>320):#右邊
                     count += 1
@@ -90,7 +90,7 @@ def draw_direction(img, lx, ly, nx, ny):
                     if(count>3):
                         Collision2[1] += 1
                     print(Collision2)
-                    cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (0, 255, 255), 2)
+                    # cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (0, 255, 255), 2)
             game_start = True
             start = time.time()
         #---------------------------------------------------------------------------
@@ -101,18 +101,18 @@ def draw_direction(img, lx, ly, nx, ny):
         list.append(dy)
         list2.append(dx)
         
-    cv2.arrowedLine(img, (60, 100), (60+dx, 100+dy), (0, 255, 0), 2)
+    cv2.arrowedLine(img, (200, 45), (200+dx, 45+dy), (0, 255, 0), 2)
     
 frameWidth = 640
 frameHeight = 480
-cap = cv2.VideoCapture("C:\\Users\\ASUS PRO\\Downloads\\table26.mp4")
+cap = cv2.VideoCapture("C:\\Users\\ASUS PRO\\Desktop\\專題\\DetectaBall\\可用\\table34.mp4")
 cap.set(3, frameWidth)
 cap.set(4, frameHeight)
 cap.set(10, 80)
 # cap.set(cv2.CAP_PROP_FPS, 10)
 pulse_ms = 65
 
-lower = np.array([4, 150, 230])
+lower = np.array([4, 150, 180])
 upper = np.array([32, 255, 255])
 
 targetPos_x = 0
