@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'pages/TrainingMatch.dart';
 import 'pages/RefereeMatch.dart';
-import 'pages/profile2.dart';
+//import 'pages/profile2.dart';
 import 'pages/profileScreen.dart';
 import 'pages/Record.dart';
 
@@ -27,7 +27,7 @@ class _BottomNavigationControllerState
       body: pages[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Color.fromARGB(255, 81, 94, 104),
+          backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
           selectedItemColor: Colors.yellow[700],
           unselectedItemColor: Colors.grey,
           currentIndex: _currentIndex,
@@ -46,7 +46,7 @@ class _BottomNavigationControllerState
             ),
             BottomNavigationBarItem(
               icon: Icon(
-                Icons.record_voice_over,
+                Icons.video_call,
                 //color: Colors.blueGrey,
               ),
               label: ('Referee'),

@@ -136,11 +136,11 @@ class Body extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: 20,
+              height: 15,
             ),
             SizedBox(
-              height: 70,
-              width: 350,
+              height: 60,
+              width: 170,
               child: TextButton(
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.all(15),
@@ -148,13 +148,13 @@ class Body extends StatelessWidget {
                   backgroundColor: Color.fromARGB(159, 138, 139, 143),
                   //onSurface: Colors.grey,
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15)),
+                      borderRadius: BorderRadius.circular(25)),
                 ),
                 onPressed: () {},
                 child: Row(
                   children: [
                     //Icon(Icons.share, color: Colors.blueGrey),
-                    SizedBox(width: 100),
+                    SizedBox(width: 20),
                     Expanded(
                       child: Text(
                         'Log Out',

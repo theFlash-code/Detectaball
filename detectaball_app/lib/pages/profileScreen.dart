@@ -10,7 +10,7 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         foregroundColor: Colors.white,
-        backgroundColor: Color.fromARGB(255, 81, 94, 104),
+        backgroundColor: Color.fromRGBO(58, 66, 86, 1.0),
         title: Text('Profile'),
       ),
       body: Body(),
