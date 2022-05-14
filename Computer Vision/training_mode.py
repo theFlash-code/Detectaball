@@ -1,3 +1,4 @@
+from types import NoneType
 import cv2
 import imutils
 import numpy as np
@@ -39,15 +40,11 @@ points = []
 def correct_skew(training_result, list):
     # img = Image.fromarray(array)
     # image = cv2.imread('table_tennis.jpg')
-    # print(type(image))
-    points = np.array(list)
-    print(type(training_result))
-    pts1 = np.float32([[179,421],[287,309],[807,298],[928,404]])
+    # print(type(training_result))
+    pts1 = np.float32(list)
     pts2 = np.float32([[250,405],[250,100],[798,100],[798,405]])
-    # cv2.imshow(training_result)
     H_rows, W_cols = training_result.shape[:2]
-    print(type(points))
-    M = cv2.getPerspectiveTransform(points, pts2)
+    M = cv2.getPerspectiveTransform(pts1, pts2)
     dst = cv2.warpPerspective(training_result, M, (W_cols, H_rows))
     cv2.imshow('training img', dst)
     cv2.waitKey(0)
@@ -73,7 +70,7 @@ def get_training_data():
             mx = round((nx+lx)/2)
             my = round((ny+ly)/2)+prev_dy
             cv2.circle(training_img,(mx, my), 2, (0,0,255), 2)
-            cv2.imshow('training result',training_img)
+            cv2.imshow('training result', training_img)
             # correct_skew(img, points)
             # print("collision")
         
@@ -97,7 +94,7 @@ def get_training_data():
     cap.set(3, frameWidth)  # set中，这里的3，下面的4和10是类似于功能号的东西，数字的值没有实际意义
     cap.set(4, frameHeight)
     cap.set(10, 80)        # 设置亮度
-    pulse_ms = 30
+    pulse_ms = 5
 
     # 调试用代码，用来产生控制滑条
     # cv2.namedWindow("HSV")
@@ -117,8 +114,10 @@ def get_training_data():
     lastPos_x = 0
     lastPos_y = 0
 
-    while True:
+    while(cap.isOpened()):
         _, img = cap.read()
+        if type(img) == NoneType:
+            break
         img = imutils.resize(img, width=1080)
         imgHsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
@@ -176,7 +175,7 @@ success, img = vid.read()
 img = imutils.resize(img, width=1080)
 
 def cnfrmArea(x, y):
-    print("checking",x,' ',y)
+    # print("checking",x,' ',y)
     if(x>=20 and x<=200 and y>=20 and y<=100):
         return True
     else:
@@ -187,7 +186,7 @@ def click_event(event, x, y, flags, params):
     if event == cv2.EVENT_LBUTTONDOWN:
         # print(point_x,' ',point_y)
         if(cnfrmArea(x,y) and point_x!=-1 and point_y!=-1):
-            print(x,' ',y,"confirm")
+            # print(x,' ',y,"confirm")
             # store
             points.append([point_x, point_y])
 
@@ -196,11 +195,11 @@ def click_event(event, x, y, flags, params):
             # finished
             if(len(points)>=4):
                 points = sorted(points, key = itemgetter(0,1))
-                for item in points:
-                    print(item,' ')
+                # for item in points:
+                #     print(item,' ')
                 get_training_data()
         else:
-            print(x,' ', y)
+            # print(x,' ', y)
 
             point_img = img.copy()
             # font = cv2.FONT_HERSHEY_SIMPLEX
