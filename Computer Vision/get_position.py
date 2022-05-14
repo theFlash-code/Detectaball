@@ -41,6 +41,10 @@ def correct_skew(img, points):
 prev_dx = 0
 prev_dy = 0
 
+point_x = -1
+point_y = -1
+points = []
+
 def get_training_data():
     cap = cv2.VideoCapture("../../Detectaball_vid/table_tennis1.mp4")
     success, training_img = cap.read()
@@ -55,9 +59,11 @@ def get_training_data():
         # collision
         print(prev_dy, dy)
         if(prev_dy > 0 and dy < 0):
-            cv2.circle(training_img,(nx, ny), 2, (0,0,255), 2)
+            mx = round((nx+lx)/2)
+            my = round((ny+ly)/2)
+            cv2.circle(training_img,(mx, my+5), 2, (0,0,255), 2)
             cv2.imshow('training result',training_img)
-            correct_skew(img, points)
+            # correct_skew(img, points)
             print("collision")
         
         prev_dy = dy
@@ -148,13 +154,11 @@ def get_training_data():
         if cv2.waitKey(pulse_ms) & 0xFF == ord('q'):          # 按下“q”推出（英文输入法）
             print("Quit\n")
             break
-
+    
+    correct_skew(training_img)
     cap.release()
     cv2.destroyAllWindows()
 
-point_x = -1
-point_y = -1
-points = []
 
 vid = cv2.VideoCapture('../../Detectaball_vid/table_tennis1.mp4')
 success, img = vid.read()

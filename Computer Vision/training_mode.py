@@ -1,152 +1,151 @@
 import cv2
+import imutils
 import numpy as np
-import time
-from pygame import mixer
-from gtts import gTTS 
+from operator import itemgetter
+from PIL import Image
 
-list = []
-list2 = []
-Collision = [0, 0, 0, 0]  #前三球
-Collision2 = [0, 0, 0, 0] #後面球數
-#[0]:左拍, [1]:右拍, [2]:左桌, [3]:右桌
-Leftpoint = 0
-Rightpoint = 0
-start = time.time()
-game_start = False
+# def correct_skew_vid():
+#     frameWidth = 320
+#     frameHeight = 240
+#     cap = cv2.VideoCapture("../../Detectaball_vid/table_tennis1.mp4")
+#     cap.set(3, frameWidth)
+#     cap.set(4, frameHeight)
+#     cap.set(1, 8)
+#     pulse_ms = 1
 
-def Speak(text):     #報比分
-    tts = gTTS(text, lang = 'en')
-    tts.save("sound.mp3")
-    mixer.init()
-    mixer.music.load("sound.mp3")
-    mixer.music.play()
-    
-def SpeakScore(l, r):
-    if((l+r)!=1 and int((l+r)/2)%2==1 and l<10 and r<10 or (l>9 and ((l+r)%2)==1 and abs(l-r)<2)):
-        text = str(l) + ' ' + str(r) + 'right serve'
-        Speak(text)
-    elif((l-r)>1 and l>9 or l==11 and r<10):
-        text = str(l) + ' ' + str(r) + 'left win, change side'
-        Speak(text)
-    elif((r-l)>1 and r>9 or r==11 and l<10):
-        text = str(l) + ' ' + str(r) + 'right win, change side'
-        Speak(text)
-    else:
-        text = str(l) + ' ' + str(r) + 'left serve'
-        Speak(text)
-    
-def empty(a):
-    pass
- 
+#     while True:
+#         _, frame = cap.read()
+#         frame = imutils.resize(frame, width=1080)
+#         H_rows, W_cols = frame.shape[:2]
 
-def draw_direction(img, lx, ly, nx, ny):
-    global count, start, game_start
-    dx = nx - lx
-    dy = ny - ly
-    if abs(dx) < 4 and abs(dy) < 4:
-        dx = 0
-        dy = 0
-    else:
-        r = (dx**2 + dy**2)**0.5
-        dx = int(dx/r*40)
-        dy = int(dy/r*40)
-        # print(dx, dy)
+#         pts1 = np.float32(points)
+#         pts2 = np.float32([[250,405],[250,100],[798,100],[798,405]])
 
-        # 偵測桌子碰撞---------------------------------------------------------------
-        if(len(list) != 0):
-            if(list[0] > 0 and dy < 0):
-                if((list2[0] > 0 and dx < 0) or (list2[0] < 0 and dx > 0)):
-                    print(0)
-                elif(lx<320):#左邊
-                    count += 1
-                    Collision[2] += 1
-                    if(count>3):
-                        Collision2[2] += 1
-                    print(Collision2)
-                    # cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (100, 0, 100), 2)
-                else:        #右邊
-                    count += 1
-                    Collision[3] += 1
-                    if(count>3):
-                        Collision2[3] += 1
-                    print(Collision2)
-                    # cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (255, 255, 0), 2)
-                start = time.time()
-        #---------------------------------------------------------------------------
-        #偵測跟球拍碰撞--------------------------------------------------------------
-        if(len(list2) != 0):
-            if((list2[0] <= 0 and dx >= 0)):#左邊
-                if(nx<320):
-                    count += 1
-                    Collision[0] += 1
-                    if(count>3):
-                        Collision2[0] += 1
-                    print(Collision2)
-                    # cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (255, 255, 255), 2)
-            elif((list2[0] >= 0 and dx <= 0)):
-                if(lx>320):#右邊
-                    count += 1
-                    Collision[1] += 1
-                    if(count>3):
-                        Collision2[1] += 1
-                    print(Collision2)
-                    # cv2.rectangle(img, (nx, ny), (nx+20, ny+20), (0, 255, 255), 2)
-            game_start = True
-            start = time.time()
-        #---------------------------------------------------------------------------
-        if(len(list) != 0):
-            list.remove(list[0])
-        if(len(list2) != 0):
-            list2.remove(list2[0])
-        list.append(dy)
-        list2.append(dx)
+#         # 生成透視變換矩陣；進行透視變換
+#         M = cv2.getPerspectiveTransform(pts1, pts2)
+#         dst = cv2.warpPerspective(frame, M, (W_cols, H_rows))
+#         # cv2.imshow("input", )
+#         cv2.imshow("vid", dst)
+#         if cv2.waitKey(pulse_ms) & 0xFF == ord('q'):
+#             print("Quit\n")
+#             break
+#     cap.release()
+#     cv2.destroyAllWindows()
+
+point_x = -1
+point_y = -1
+points = []
+
+def correct_skew(training_result, list):
+    # img = Image.fromarray(array)
+    # image = cv2.imread('table_tennis.jpg')
+    # print(type(image))
+    points = np.array(list)
+    print(type(training_result))
+    pts1 = np.float32([[179,421],[287,309],[807,298],[928,404]])
+    pts2 = np.float32([[250,405],[250,100],[798,100],[798,405]])
+    # cv2.imshow(training_result)
+    H_rows, W_cols = training_result.shape[:2]
+    print(type(points))
+    M = cv2.getPerspectiveTransform(points, pts2)
+    dst = cv2.warpPerspective(training_result, M, (W_cols, H_rows))
+    cv2.imshow('training img', dst)
+    cv2.waitKey(0)
+
+prev_dx = 0
+prev_dy = 0
+
+
+def get_training_data():
+    cap = cv2.VideoCapture("../../Detectaball_vid/table_tennis1.mp4")
+    success, training_img = cap.read()
+    training_img = imutils.resize(training_img, width=1080)
+
+    def draw_direction(img, lx, ly, nx, ny):
+        # 根据上一位置与当前位置计算移动方向并绘制箭头
+        dx = nx - lx
+        dy = ny - ly
+
+        global prev_dy
+        # collision
+        # print(prev_dy, dy)
+        if(prev_dy > 0 and dy < 0):
+            mx = round((nx+lx)/2)
+            my = round((ny+ly)/2)+prev_dy
+            cv2.circle(training_img,(mx, my), 2, (0,0,255), 2)
+            cv2.imshow('training result',training_img)
+            # correct_skew(img, points)
+            # print("collision")
         
-    cv2.arrowedLine(img, (200, 45), (200+dx, 45+dy), (0, 255, 0), 2)
-    
-frameWidth = 640
-frameHeight = 480
-cap = cv2.VideoCapture("../../Detectaball_vid/table_tennis1.mp4")
-cap.set(3, frameWidth)
-cap.set(4, frameHeight)
-cap.set(10, 80)
-# cap.set(cv2.CAP_PROP_FPS, 10)
-pulse_ms = 65
-
-lower = np.array([4, 150, 180])
-upper = np.array([32, 255, 255])
-
-targetPos_x = 0
-targetPos_y = 0
-lastPos_x = 0
-lastPos_y = 0
-
-count = 0
-CountTableLeft = 0
-CountTableRight = 0
-CountRacketLeft = 0
-CountRacketRight = 0
-
-#考慮比分還沒11分 或 Duece之情況
-while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoint)<2) or (Rightpoint>9 and abs(Leftpoint-Rightpoint)<2)):
-    if((Leftpoint+Rightpoint)!=1 and int((Leftpoint+Rightpoint)/2)%2==1 and Leftpoint<10 and Rightpoint<10 or (Leftpoint>9 and ((Leftpoint+Rightpoint)%2)==1)):#右發
-        while True:
-            _, img = cap.read()
-
-            imgHsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-            imgMask = cv2.inRange(imgHsv, lower, upper)
-            imgOutput = cv2.bitwise_and(img, img, mask=imgMask)
-            contours, hierarchy = cv2.findContours(imgMask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
-
-            imgMask = cv2.cvtColor(imgMask, cv2.COLOR_GRAY2BGR)
+        prev_dy = dy
+        if abs(dx) < 4 and abs(dy) < 4:
+            dx = 0
+            dy = 0
+        else:
+            r = (dx**2 + dy**2)**0.5
+            dx = int(dx/r*40)
+            dy = int(dy/r*40)
+            # print(dx, dy)
+        cv2.arrowedLine(img, (60, 100), (60+dx, 100+dy), (0, 255, 0), 2)
+        # print(nx-lx, ny-ly)   # 噪声一般为+-1
+        # cv2.arrowedLine(img, (150, 150), (150+(nx-lx)*4, 150+(ny-ly)*4), (0, 0, 255), 2, 0, 0, 0.2)
 
 
-            x, y, w, h = 0, 0, 0, 0
 
-            if len(contours) != 0: 
-                cnt = contours[0]
+    frameWidth = 640
+    frameHeight = 480  # 0对应笔记本自带摄像头
+    cap.set(3, frameWidth)  # set中，这里的3，下面的4和10是类似于功能号的东西，数字的值没有实际意义
+    cap.set(4, frameHeight)
+    cap.set(10, 80)        # 设置亮度
+    pulse_ms = 30
+
+    # 调试用代码，用来产生控制滑条
+    # cv2.namedWindow("HSV")
+    # cv2.resizeWindow("HSV", 640, 300)
+    # cv2.createTrackbar("HUE Min", "HSV", 4, 179, empty)
+    # cv2.createTrackbar("SAT Min", "HSV", 180, 255, empty)
+    # cv2.createTrackbar("VALUE Min", "HSV", 156, 255, empty)
+    # cv2.createTrackbar("HUE Max", "HSV", 32, 179, empty)
+    # cv2.createTrackbar("SAT Max", "HSV", 255, 255, empty)
+    # cv2.createTrackbar("VALUE Max", "HSV", 255, 255, empty)
+
+    lower = np.array([0, 180, 156])     # 适用于橙色乒乓球4<=h<=32
+    upper = np.array([21, 255, 255])
+
+    targetPos_x = 0
+    targetPos_y = 0
+    lastPos_x = 0
+    lastPos_y = 0
+
+    while True:
+        _, img = cap.read()
+        img = imutils.resize(img, width=1080)
+        imgHsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+
+        # h_min = cv2.getTrackbarPos("HUE Min", "HSV")
+        # h_max = cv2.getTrackbarPos("HUE Max", "HSV")
+        # s_min = cv2.getTrackbarPos("SAT Min", "HSV")
+        # s_max = cv2.getTrackbarPos("SAT Max", "HSV")
+        # v_min = cv2.getTrackbarPos("VALUE Min", "HSV")
+        # v_max = cv2.getTrackbarPos("VALUE Max", "HSV")
+        
+        # lower = np.array([h_min, s_min, v_min])
+        # upper = np.array([h_max, s_max, v_max])
+
+        imgMask = cv2.inRange(imgHsv, lower, upper)     # 获取遮罩
+        imgOutput = cv2.bitwise_and(img, img, mask=imgMask)
+        contours, hierarchy = cv2.findContours(imgMask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)   # 查找轮廓
+        # https://blog.csdn.net/laobai1015/article/details/76400725
+        # CV_RETR_EXTERNAL 只检测最外围轮廓
+        # CV_CHAIN_APPROX_NONE 保存物体边界上所有连续的轮廓点到contours向量内
+        imgMask = cv2.cvtColor(imgMask, cv2.COLOR_GRAY2BGR)     # 转换后，后期才能够与原画面拼接，否则与原图维数不同
+
+        # 下面的代码查找包围框，并绘制
+        x, y, w, h = 0, 0, 0, 0
+        for cnt in contours:
             area = cv2.contourArea(cnt)
-                # print(area)
-            if area > 0:
+            # print(area)
+            if area > 5:
                 x, y, w, h = cv2.boundingRect(cnt)
                 lastPos_x = targetPos_x
                 lastPos_y = targetPos_y
@@ -154,122 +153,68 @@ while(Leftpoint<10 and Rightpoint<=10 or (Leftpoint>9 and abs(Leftpoint-Rightpoi
                 targetPos_y = int(y+h/2)
                 cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
                 cv2.circle(img, (targetPos_x, targetPos_y), 2, (0, 255, 0), 4)
-                
-            # cv2.putText(img, "({:0<2d}, {:0<2d})".format(targetPos_x, targetPos_y), (20, 30), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 2) 
-            
 
-            draw_direction(img, lastPos_x, lastPos_y, targetPos_x, targetPos_y)
+        # 坐标（图像内的）
+        cv2.putText(img, "({:0<2d}, {:0<2d})".format(targetPos_x, targetPos_y), (20, 30),
+                    cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 2)  # 文字
+        draw_direction(img, lastPos_x, lastPos_y, targetPos_x, targetPos_y)
 
-            imgStack = np.hstack([img, imgOutput])
-            cv2.imshow('Horizontal Stacking', imgStack)
-            if cv2.waitKey(pulse_ms) & 0xFF == ord('q'):
-                print("Quit\n")
-                break
+        imgStack = np.hstack([img, imgOutput])
+        # imgStack = np.hstack([img, imgMask])            # 拼接
+        cv2.imshow('Horizontal Stacking', imgStack)     # 显示
+        if cv2.waitKey(pulse_ms) & 0xFF == ord('q'):          # 按下“q”推出（英文输入法）
+            print("Quit\n")
+            break
+    
+    correct_skew(training_img, points)
+    cap.release()
+    cv2.destroyAllWindows()
+
+
+vid = cv2.VideoCapture('../../Detectaball_vid/table_tennis1.mp4')
+success, img = vid.read()
+img = imutils.resize(img, width=1080)
+
+def cnfrmArea(x, y):
+    print("checking",x,' ',y)
+    if(x>=20 and x<=200 and y>=20 and y<=100):
+        return True
     else:
-        while True:
-            _, img = cap.read()
+        return False
 
-            imgHsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-            imgMask = cv2.inRange(imgHsv, lower, upper)
-            imgOutput = cv2.bitwise_and(img, img, mask=imgMask)
-            contours, hierarchy = cv2.findContours(imgMask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_NONE)
+def click_event(event, x, y, flags, params):
+    global point_x, point_y, points
+    if event == cv2.EVENT_LBUTTONDOWN:
+        # print(point_x,' ',point_y)
+        if(cnfrmArea(x,y) and point_x!=-1 and point_y!=-1):
+            print(x,' ',y,"confirm")
+            # store
+            points.append([point_x, point_y])
 
-            imgMask = cv2.cvtColor(imgMask, cv2.COLOR_GRAY2BGR)
+            # update img
+            cv2.circle(img,(point_x,point_y), 2, (0,0,255), 2)
+            # finished
+            if(len(points)>=4):
+                points = sorted(points, key = itemgetter(0,1))
+                for item in points:
+                    print(item,' ')
+                get_training_data()
+        else:
+            print(x,' ', y)
 
+            point_img = img.copy()
+            # font = cv2.FONT_HERSHEY_SIMPLEX
+            # cv2.putText(point_img, str(x)+','+str(y), (x,y), font, 1, (255,0,0), 2)
+            cv2.circle(point_img,(x,y), 2, (0,0,255), 2)
+            point_x = x
+            point_y = y
+            cv2.imshow('image', point_img)
 
-            x, y, w, h = 0, 0, 0, 0
-
-            if len(contours) != 0: 
-                cnt = contours[0]
-            area = cv2.contourArea(cnt)
-                # print(area)
-            if area > 0:
-                x, y, w, h = cv2.boundingRect(cnt)
-                lastPos_x = targetPos_x
-                lastPos_y = targetPos_y
-                targetPos_x = int(x+w/2)
-                targetPos_y = int(y+h/2)
-                cv2.rectangle(img, (x, y), (x+w, y+h), (0, 255, 0), 2)
-                cv2.circle(img, (targetPos_x, targetPos_y), 2, (0, 255, 0), 4)
-                
-            # cv2.putText(img, "({:0<2d}, {:0<2d})".format(targetPos_x, targetPos_y), (20, 30), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0), 2) 
-            
-
-            draw_direction(img, lastPos_x, lastPos_y, targetPos_x, targetPos_y)
-            #----------------------
-            #如果是左邊發球
-            # timeout的問題(含發球那3顆)
-            if(time.time() - start > 1 and game_start == True):
-                if((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==1) and (Collision2[3]==0)) or ((Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==1) and (Collision2[3]==0)) or ((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==1) and (Collision2[1]==0) and (Collision2[2]==1) and (Collision2[3]==0)):
-                    Rightpoint+=1
-                    Collision2[0]=0
-                    Collision2[1]=0
-                    Collision2[2]=0
-                    Collision2[3]=0
-                    print("右加分")
-                    SpeakScore(Leftpoint, Rightpoint)
-                elif((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==0) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)):
-                    Leftpoint+=1
-                    Collision2[0]=0
-                    Collision2[1]=0
-                    Collision2[2]=0
-                    Collision2[3]=0
-                    print("左加分")
-                    SpeakScore(Leftpoint, Rightpoint)
-                
-                game_start = False
-                    
-            if(count <= 3 and count > 0):#前三球(含發球)
-                if(((Collision[0]==0) and (Collision[1]==0) and (Collision[2]==0) and (Collision[3]==0)) or ((Collision[0]==1) and (Collision[1]==0) and (Collision[2]==0) and (Collision[3]==0))
-                or ((Collision[0]==1) and (Collision[1]==0) and (Collision[2]==1) and (Collision[3]==0))):
-                    print('前3球正常')
-                elif(Collision[0]==1) and (Collision[1]==0) and (Collision[2]==1) and (Collision[3]==1):
-                    print('繼續')
-                else:
-                    Rightpoint += 1
-                    
-            if(count > 3):               #後面
-                if(((Collision2[0]==0) and (Collision2[1]==0) and (Collision2[2]==0) and (Collision2[3]==0)) or ((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==0))
-                or ((Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==1) and (Collision2[3]==0)) or ((Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==1) and (Collision2[3]==0))):
-                    print('繼續')
-                elif(Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==1) and (Collision2[3]==1):
-                    Collision2[0]=0
-                    Collision2[1]=0
-                    Collision2[2]=0
-                    Collision2[3]=0
-                    break
-                elif(Collision2[0]==1) and (Collision2[1]==1) and (Collision2[2]==2) and (Collision2[3]==0):
-                    Rightpoint += 1
-                    Collision2[0]=0
-                    Collision2[1]=0
-                    Collision2[2]=0
-                    Collision2[3]=0
-                    SpeakScore(Leftpoint, Rightpoint)
-                    break
-                elif(Collision2[0]==0) and (Collision2[1]==1) and (Collision2[2]==0) and (Collision2[3]==1):
-                    Leftpoint += 1
-                    Collision2[0]=0
-                    Collision2[1]=0
-                    Collision2[2]=0
-                    Collision2[3]=0
-                    SpeakScore(Leftpoint, Rightpoint)
-                    break
-
-            # 記分板
-            cv2.rectangle(img, (10, 10), (150, 90), (255, 255, 255), 2)
-            cv2.line(img, (10, 50), (150, 50), (255, 255, 255), 2)  # 中間水平線
-            cv2.line(img, (110, 10), (110, 90), (255, 255, 255), 2) # 垂直分隔線
-            cv2.putText(img, "LeftPlayer", (15,35), cv2.FONT_HERSHEY_PLAIN, 1, (255, 255, 255), 2)
-            cv2.putText(img, "RightPlayer", (15,75), cv2.FONT_HERSHEY_PLAIN, 1, (255, 255, 255), 2)
-            cv2.putText(img, "{:d}".format(Leftpoint), (125,35), cv2.FONT_HERSHEY_PLAIN, 1, (255, 255, 255), 2)
-            cv2.putText(img, "{:d}".format(Rightpoint), (125,75), cv2.FONT_HERSHEY_PLAIN, 1, (255, 255, 255), 2)
-            
-            imgStack = np.hstack([img, imgOutput])
-            cv2.imshow('Horizontal Stacking', imgStack)
-            if cv2.waitKey(pulse_ms) & 0xFF == ord('q'):
-                print("Quit\n")
-                break
-        
-
-cap.release()
+cv2.rectangle(img, (20, 20), (200, 100), (255,255,255), 3, cv2.LINE_AA)
+cv2.putText(img, "confirm", (50, 70), cv2.FONT_HERSHEY_SIMPLEX, 1, (255, 255, 255), 1, cv2.LINE_AA)
+# img = cv2.imread('table_tennis.jpg', 1)
+cv2.imshow('image', img)
+cv2.setMouseCallback('image', click_event)
+    
+cv2.waitKey(0)
 cv2.destroyAllWindows()
