@@ -1,6 +1,6 @@
 # Detectaball 
 ### An App that'll make you enjoy table tennis even more.
-[![Detectaball Intro](https://img.youtube.com/vi/P4hCXZWE8PI/0.jpg)](https://www.youtube.com/watch?v=P4hCXZWE8PI)
+[![Detectaball Intro](https://img.youtube.com/vi/P4hCXZWE8PI/0.jpg)](https://www.youtube.com/watch?v=P4hCXZWE8PI)<br>
 Detectaball is a school project made by our team (4 university student), we aim for making a mobile app to be used as an intelligent scoreboard, so that the player will no longer be frustrated when they forgot what's the score. In addition, we want to provide an analytic system to let the user know their strengths and weaknesses, thereby allowing them to improve their performance.
 
 ## Computer Vision
